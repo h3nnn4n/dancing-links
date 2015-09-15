@@ -13,9 +13,15 @@ typedef struct __links {
     char *name;
 } _links;
 
+typedef struct __ans {
+    struct __ans   *next;
+    struct __links *O;
+} _ans;
+
 _links *init_torus();
 void    insert_col_header(_links *);
 void    insert_row_header(_links *);
 void    build_links_for_dancing(_links *h, int *m, int x, int y);
+void    knuths_magic(_links *, int, _ans *);
 
 #endif

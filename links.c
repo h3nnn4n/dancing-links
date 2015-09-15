@@ -3,6 +3,118 @@
 
 #include "links.h"
 
+void knuths_magic(_links *h, int k, _ans *O){
+    _links *c;
+    _links *i;
+    _links *j;
+    _links *ii;
+    _links *jj;
+    _links *r;
+
+    if ( h->R == h ) {                      // Line 1
+        printf("Solved\n");                 // Line 1
+        return;                             // Line 1
+    }                                       // Line 1
+
+    c = h->R; // Chose a colum object       // Line 3
+
+    // Cover column
+    c->R->L = c->L;                         // Line 15
+    c->L->R = c->R;                         // Line 15
+
+    i = c->D;                               // Line 16
+
+    while ( i != c ){                       // Line 15
+        j = i->R;                           // Line 16
+        while ( j != i ){                   // Line 16
+            j->D->U = j->U;                 // Line 18
+            j->U->D = j->D;                 // Line 18
+            (j->C->size)--;                 // Line 19
+
+            j = j->R;                       // Line 17
+        }                                 
+        i = i->D;                           // Line 18 
+    }                                      
+    // End column covering                  
+
+    _ans *tt = (_ans*) malloc ( sizeof(_ans) );
+    O->next = tt;                                       
+
+    r = c->D;                               // Line 4
+    while ( r != c ){                       // Line 4
+        tt->O = r;                          // Line 5
+        j = r->R;                           // Line 6
+        while ( j != r ){                   // Line 6
+            // Cover column                 // Line 7
+            c->R->L = c->L;                 // Line 15
+            c->L->R = c->R;                 // Line 15
+
+            i = c->D;                       // Line 16
+
+            while ( i != c ){               // Line 16
+                j = i->R;                   // Line 17
+                while ( j != i ){           // Line 17
+                    j->D->U = j->U;         // Line 18 
+                    j->U->D = j->D;         // Line 18
+                    (j->C->size)--;         // Line 19
+
+                    j = j->R;               // Line 17
+                }
+
+                i = i->D;                   // Line 16
+            }
+            // End column covering
+
+            knuths_magic(h, k + 1, O);      // Line 8
+
+            r = tt->O;                      // Line 9
+            c =  r->C;                      // Line 9
+
+            j = r->L;                       // Line 10
+            while ( j == r ){               // Line 10
+
+                // Uncover                  // Line 11
+                ii = c->U;                  // Line 20
+                while ( ii != c ){          // Line 20
+                    jj = ii->L;             // Line 21
+                    while ( jj != ii ){     // Line 21  
+                        (j->C->size)++;     // Line 22
+                        j->D->U = j;        // Line 23
+                        j->U->D = j;        // Line 23
+
+                        jj = jj->L;         // Line 21
+                    }
+
+                    ii = ii->U;             // Line 20
+                }
+                c->R->L = c;                // Line 24
+                c->L->R = c;                // Line 24
+                // end uncoverig
+                j = j->L;                   // Line 10
+            }
+        }  
+        r = r->D;                           // Line 4
+    }    
+
+    // Uncover                              // Line 11
+    ii = c->U;                              // Line 20
+    while ( ii != c ){                      // Line 20
+        jj = ii->L;                         // Line 21
+        while ( jj != ii ){                 // Line 21  
+            (j->C->size)++;                 // Line 22
+            j->D->U = j;                    // Line 23
+            j->U->D = j;                    // Line 23
+            jj = jj->L;                     // Line 21
+        }
+        ii = ii->U;                         // Line 20
+    }
+    c->R->L = c;                            // Line 24
+    c->L->R = c;                            // Line 24
+    // end uncoverig
+
+    return;
+}
+
 _links *init_torus(){
     _links *p = (_links*) malloc ( sizeof(_links) );
 
@@ -65,7 +177,7 @@ void build_links_for_dancing(_links *h, int *m, int x, int y){
         while ( t->D != NULL ){
             t = t->D;
         }
-        
+
         t->D = a;
         a->U = t;
     }
