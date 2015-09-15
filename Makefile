@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-lm
+CFLAGS=-lm -Wall
 SOURCES=links.c main.c
 BIN=dlx
 
