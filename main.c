@@ -24,6 +24,7 @@
 
 int main(){
     _links *m;
+    int set[42] = { 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1};
 
     m = init_torus();
 
@@ -40,6 +41,9 @@ int main(){
     insert_row_header(m);
     insert_row_header(m);
     insert_row_header(m);
+    insert_row_header(m);
+
+    build_links_for_dancing(m, set, 7, 6);
 
     puts("--------------------");
 
@@ -51,7 +55,6 @@ int main(){
         printf("%p -> %p = %d\n", t, t->R, t->n);
         t = t->R;
     }
-    printf("%p -> %p = %d\n", t, t->R, t->n);
 
     puts("--------------------");
 
@@ -61,9 +64,23 @@ int main(){
         printf("%p -> %p = %d\n", t, t->D, t->n);
         t = t->D;
     }
-    printf("%p -> %p = %d\n", t, t->D, t->n);
 
     puts("--------------------");
+
+    _links *a, *b;
+
+    a = m->R;
+
+    while ( a != m ){
+        b = a->D;
+        while ( b != a ){
+            printf("%d ", 1);
+            b = b->D;
+        }
+        a = a->R;
+        puts("");
+    }
+
 
     return EXIT_SUCCESS;
 }
