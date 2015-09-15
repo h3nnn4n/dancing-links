@@ -16,5 +16,6 @@ typedef struct __links {
 _links *init_torus();
 void    insert_col_header(_links *);
 void    insert_row_header(_links *);
+void    build_links_for_dancing(_links *h, int *m, int x, int y);
 
 #endif
