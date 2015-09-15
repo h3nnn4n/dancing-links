@@ -11,6 +11,24 @@ void knuths_magic(_links *h, int k, _ans *O){
     _links *jj;
     _links *r;
 
+    {
+        _ans *aux = O;
+        while (aux != NULL){
+            if ( aux->O == NULL )
+                break;
+
+            _links *a = aux->O->R;
+            while ( a != NULL && a != aux->O->R){
+                printf("%d ",a->C->n);
+                a = a->R;
+            }
+            puts("");
+
+            aux = aux->next;
+        }
+    }
+
+    /*printf("%p %p\n", h->R, h);*/
     if ( h->R == h ) {                      // Line 1
         printf("Solved\n");                 // Line 1
         return;                             // Line 1
@@ -38,7 +56,13 @@ void knuths_magic(_links *h, int k, _ans *O){
     // End column covering                  
 
     _ans *tt = (_ans*) malloc ( sizeof(_ans) );
-    O->next = tt;                                       
+    _ans *aux = O;
+    while (aux->next != NULL){
+        aux = aux->next;
+    }
+
+    aux->next = tt;
+    tt ->next = NULL;
 
     r = c->D;                               // Line 4
     while ( r != c ){                       // Line 4
@@ -112,6 +136,14 @@ void knuths_magic(_links *h, int k, _ans *O){
     c->L->R = c;                            // Line 24
     // end uncoverig
 
+    aux = O;
+    while (aux->next->next != NULL && aux->next != NULL){
+        aux = aux->next;
+    }
+
+    aux->next = NULL;
+    free(tt);
+
     return;
 }
 
@@ -156,6 +188,7 @@ void build_links_for_dancing(_links *h, int *m, int x, int y){
                 t2->R    = new;
                 new->D   = NULL;
                 new->R   = NULL;
+                new->L   = t2;
                 new->U   = t1;
                 new->C   = a;
                 new->n   = 1;
@@ -180,6 +213,14 @@ void build_links_for_dancing(_links *h, int *m, int x, int y){
 
         t->D = a;
         a->U = t;
+    }
+
+    b = h->D;
+
+    while ( b != h ){
+        b->L->R = b->R;
+        b->R->L = b->L;
+        b = b->D;
     }
 
     return;
