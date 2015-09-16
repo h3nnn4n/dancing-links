@@ -23,5 +23,7 @@ void    insert_col_header(_links *);
 void    insert_row_header(_links *);
 void    build_links_for_dancing(_links *h, int *m, int x, int y);
 void    knuths_magic(_links *, int, _ans *);
+void    cover(_links *c);
+void    uncover(_links *c);
 
 #endif
