@@ -31,19 +31,19 @@ void uncover(_links *c){
 
     i = c->U;                  // Line 20
     while ( i != c ){          // Line 20
-        j = i->L;             // Line 21
-        while ( j != i ){     // Line 21
-            j->C->size += 1;  // Line 22
-            j->D->U = j;     // Line 23
-            j->U->D = j;     // Line 23
+        j = i->L;              // Line 21
+        while ( j != i ){      // Line 21
+            j->C->size += 1;   // Line 22
+            j->D->U = j;       // Line 23
+            j->U->D = j;       // Line 23
 
-            j = j->L;         // Line 21
+            j = j->L;          // Line 21
         }
 
-        i = i->U;             // Line 20
+        i = i->U;              // Line 20
     }
-    c->R->L = c;                // Line 24
-    c->L->R = c;                // Line 24
+    c->R->L = c;               // Line 24
+    c->L->R = c;               // Line 24
 
     return;
 }
@@ -104,7 +104,7 @@ void knuths_magic(_links *h, int k, _ans *O){
 
             j = j->L;                   // Line 10
         }
-        r = r->D;                           // Line 4
+        r = r->D;                       // Line 4
     }
 
     uncover(c);                         // Line 12
