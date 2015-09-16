@@ -24,26 +24,26 @@
 
 int main(){
     _links *m;
-    int set[42] = { 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1};
+    /*int set[42] = { 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1};*/
+    int set[9] = {0, 0, 1,
+                  1, 1, 1,
+                  1, 0, 0};
+
+    int x, y, i;
+    x = 3;
+    y = 3;
 
     m = init_torus();
 
-    insert_col_header(m);
-    insert_col_header(m);
-    insert_col_header(m);
-    insert_col_header(m);
-    insert_col_header(m);
-    insert_col_header(m);
+    for ( i = 0 ; i < x ; i++){
+        insert_row_header(m);
+    }
 
-    insert_row_header(m);
-    insert_row_header(m);
-    insert_row_header(m);
-    insert_row_header(m);
-    insert_row_header(m);
-    insert_row_header(m);
-    insert_row_header(m);
+    for ( i = 0 ; i < y ; i++){
+        insert_col_header(m);
+    }
 
-    build_links_for_dancing(m, set, 7, 6);
+    build_links_for_dancing(m, set, x, y);
 
     puts("--------------------");
 
@@ -55,6 +55,7 @@ int main(){
         printf("%p -> %p = %d\n", t, t->R, t->n);
         t = t->R;
     }
+    printf("%p -> %p = %d\n", t, t->R, t->n);
 
     puts("--------------------");
 
@@ -64,6 +65,7 @@ int main(){
         printf("%p -> %p = %d\n", t, t->D, t->n);
         t = t->D;
     }
+    printf("%p -> %p = %d\n", t, t->D, t->n);
 
     puts("--------------------");
 
@@ -82,9 +84,27 @@ int main(){
     }
 
     puts("--------------------");
-    _ans *O = (_ans*) malloc ( sizeof(_ans) );
-    knuths_magic(m, 0, O);
-    puts("--------------------");
+
+    a = m->R;
+    while ( a != m ){
+        b = a->D;
+        while (b != a){
+            t = b->R;
+            printf("%p -> %p -> %p = %d\n", b, b->D, b->D->D, 1);
+            while (t != b){
+                /*printf("%p -> %p = %d\n", t, t->D, t->n);*/
+                t = t->R;
+            }
+            b = b->D;
+        }
+        puts("--------------------");
+        a = a->R;
+    }
+
+    /*puts("--------------------");*/
+    /*_ans *O = (_ans*) malloc ( sizeof(_ans) );*/
+    /*knuths_magic(m, 0, O);*/
+    /*puts("--------------------");*/
 
     return EXIT_SUCCESS;
 }
