@@ -11,7 +11,7 @@ void cover(_links *c){
     i = c->D;                               // Line 16
 
     while ( i != c ){                       // Line 16
-        printf("%p -> %p\n", i, i->R);
+        printf("%p | %p -> %p\n", c, i, i->R);
         j = i->R;                           // Line 17
         while ( j != i ){                   // Line 17
             j->D->U = j->U;                 // Line 18
@@ -50,10 +50,7 @@ void uncover(_links *c){
 
 void knuths_magic(_links *h, int k, _ans *O){
     _links *c;
-    _links *i;
     _links *j;
-    _links *ii;
-    _links *jj;
     _links *r;
 
     /*printf("k = %d | \t %p -> %p -> %p\n", k, h, h->R, h->R->R);*/
@@ -75,9 +72,7 @@ void knuths_magic(_links *h, int k, _ans *O){
 
     c = h->R; // Chose a colum object       // Line 2
 
-    // Cover column c                       // Line 3
     cover(c);                               // Line 3
-    // End column covering
 
     _ans *tt = (_ans*) malloc ( sizeof(_ans) ); // Storing the anserws
     _ans *aux = O;                              //
@@ -92,14 +87,11 @@ void knuths_magic(_links *h, int k, _ans *O){
         tt->O = r;                          // Line 5
         j = r->R;                           // Line 6
         while ( j != r ){                   // Line 6
-            // Cover column j               // Line 7
             printf("%p -> %p\n", j, j->R);
-            cover(j);
-            // End column covering
+            cover(j);                       // Line 7
             j = j->R;
         }
 
-        /*printf(" going to %d\n", c->C->n);*/
         knuths_magic(h, k + 1, O);      // Line 8
 
         r = tt->O;                      // Line 9
@@ -108,18 +100,14 @@ void knuths_magic(_links *h, int k, _ans *O){
         j = r->L;                       // Line 10
         while ( j != r ){               // Line 10
 
-            // Uncover column j         // Line 11
-            uncover(j);
-            // end uncoverig
+            uncover(j);                 // Line 11
 
             j = j->L;                   // Line 10
         }
         r = r->D;                           // Line 4
     }
 
-    // Uncover column c                     // Line 11
-    uncover(c);
-    // end uncoverig
+    uncover(c);                         // Line 12
 
     aux = O;
     while (aux->next->next != NULL && aux->next != NULL){
