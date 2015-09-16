@@ -11,58 +11,56 @@ void knuths_magic(_links *h, int k, _ans *O){
     _links *jj;
     _links *r;
 
-    {
-        _ans *aux = O;
-        while (aux != NULL){
-            if ( aux->O == NULL )
-                break;
+    /*{*/
+        /*_ans *aux = O;*/
+        /*while (aux != NULL){*/
+            /*if ( aux->O == NULL )*/
+                /*break;*/
 
-            _links *a = aux->O->R;
-            while ( a != NULL && a != aux->O->R){
-                printf("%d ",a->C->n);
-                a = a->R;
-            }
-            puts("");
+            /*_links *a = aux->O->R;*/
+            /*while ( a != NULL && a != aux->O->R){*/
+                /*printf("%d ",a->C->n);*/
+                /*a = a->R;*/
+            /*}*/
+            /*puts("");*/
 
-            aux = aux->next;
-        }
-    }
+            /*aux = aux->next;*/
+        /*}*/
+    /*}*/
 
-    /*printf("%p %p\n", h->R, h);*/
+    printf("%p %p\n", h->R, h);
     if ( h->R == h ) {                      // Line 1
         printf("Solved\n");                 // Line 1
         return;                             // Line 1
     }                                       // Line 1
 
-    c = h->R; // Chose a colum object       // Line 3
+    c = h->R; // Chose a colum object       // Line 2
 
-    // Cover column
+    // Cover column                         // Line 3
     c->R->L = c->L;                         // Line 15
     c->L->R = c->R;                         // Line 15
 
     i = c->D;                               // Line 16
 
-    while ( i != c ){                       // Line 15
-        j = i->R;                           // Line 16
-        while ( j != i ){                   // Line 16
+    while ( i != c ){                       // Line 16
+        j = i->R;                           // Line 17
+        while ( j != i ){                   // Line 17
             j->D->U = j->U;                 // Line 18
             j->U->D = j->D;                 // Line 18
-            (j->C->size)--;                 // Line 19
+            j->C->size -= 1;                // Line 19
 
             j = j->R;                       // Line 17
-        }                                 
-        i = i->D;                           // Line 18 
-    }                                      
-    // End column covering                  
-
-    _ans *tt = (_ans*) malloc ( sizeof(_ans) );
-    _ans *aux = O;
-    while (aux->next != NULL){
-        aux = aux->next;
+        }
+        i = i->D;                           // Line 16
     }
+    // End column covering
 
-    aux->next = tt;
-    tt ->next = NULL;
+    _ans *tt = (_ans*) malloc ( sizeof(_ans) ); // Storing the anserws
+    _ans *aux = O;                              //
+    while (aux->next != NULL) aux = aux->next;  //
+    aux->next = tt;                             //
+    tt ->next = NULL;                           //
+    tt ->O    = NULL;                           //
 
     r = c->D;                               // Line 4
     while ( r != c ){                       // Line 4
@@ -78,9 +76,9 @@ void knuths_magic(_links *h, int k, _ans *O){
             while ( i != c ){               // Line 16
                 j = i->R;                   // Line 17
                 while ( j != i ){           // Line 17
-                    j->D->U = j->U;         // Line 18 
+                    j->D->U = j->U;         // Line 18
                     j->U->D = j->D;         // Line 18
-                    (j->C->size)--;         // Line 19
+                    j->C->size -= 1;        // Line 19
 
                     j = j->R;               // Line 17
                 }
@@ -95,13 +93,13 @@ void knuths_magic(_links *h, int k, _ans *O){
             c =  r->C;                      // Line 9
 
             j = r->L;                       // Line 10
-            while ( j == r ){               // Line 10
+            while ( j != r ){               // Line 10
 
                 // Uncover                  // Line 11
                 ii = c->U;                  // Line 20
                 while ( ii != c ){          // Line 20
                     jj = ii->L;             // Line 21
-                    while ( jj != ii ){     // Line 21  
+                    while ( jj != ii ){     // Line 21
                         (j->C->size)++;     // Line 22
                         j->D->U = j;        // Line 23
                         j->U->D = j;        // Line 23
@@ -116,15 +114,15 @@ void knuths_magic(_links *h, int k, _ans *O){
                 // end uncoverig
                 j = j->L;                   // Line 10
             }
-        }  
+        }
         r = r->D;                           // Line 4
-    }    
+    }
 
     // Uncover                              // Line 11
     ii = c->U;                              // Line 20
     while ( ii != c ){                      // Line 20
         jj = ii->L;                         // Line 21
-        while ( jj != ii ){                 // Line 21  
+        while ( jj != ii ){                 // Line 21
             (j->C->size)++;                 // Line 22
             j->D->U = j;                    // Line 23
             j->U->D = j;                    // Line 23
