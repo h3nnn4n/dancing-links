@@ -137,63 +137,40 @@ _links *init_torus(){
 
 void build_links_for_dancing(_links *h, int *m, int x, int y){
     int i, j;
-    _links *a, *b;
+    _links *a;
+    _links *first;
+    _links *t;
 
-    for ( j = 0, b = h->D ; j < x ; j++, b = b->D ){
-        _links *ta, *tb;
-        ta = NULL;
-        for ( i = 0, a = h->R ; i < y ; i++, a = a->R ){
-            if ( m[i * x + j] == 1){
-                _links *t1, *t2;
+    for ( j = 0 ; j < x ; j++ ){
+        for ( i = 0, a = h->R, first = NULL ; i < y ; i++, a = a->R){
+            if ( m[i + j*x] == 1){
+                for ( t = a->D; t != a; t = t->D );
+
                 _links *new = (_links*) malloc ( sizeof(_links) );
-                t1 = a;
-                t2 = b;
 
-                while ( t1->D != NULL ){
-                    t1 = t1->D;
+                _links *tt = t->D;
+                t->D   = new;
+                new->D = tt;
+                tt->U  = new;
+                new->U = t;
+                new->R = t;
+                new->C = a;
+                new->n = i;
+
+                if ( first == NULL ){
+                    new->R = new;
+                    new->L = new;
+                    first  = new;
+                } else {
+                    tt       = first->L;
+                    first->L = new;
+                    new->L   = tt;
+                    tt->R    = new;
+                    new->R   = first;
+
                 }
-
-                while ( t2->R != NULL ){
-                    t2 = t2->R;
-                }
-
-                t1->D    = new;
-                t2->R    = new;
-                new->D   = NULL;
-                new->R   = NULL;
-                new->L   = t2;
-                new->U   = t1;
-                new->C   = a;
-                new->n   = 1;
-                ta       = new;
-            }
+            } 
         }
-        tb = ta;
-        while ( tb->L != NULL ){
-            tb = tb->L;
-        }
-        tb->L = ta;
-        ta->R = tb;
-    }
-
-    for ( i = 0, a = h->R ; i < y ; i++, a = a->R ){
-        _links *t;
-        t = a;
-
-        while ( t->D != NULL ){
-            t = t->D;
-        }
-
-        t->D = a;
-        a->U = t;
-    }
-
-    b = h->D;
-
-    while ( b != h ){
-        b->L->R = b->R;
-        b->R->L = b->L;
-        b = b->D;
     }
 
     return;
@@ -208,8 +185,8 @@ void insert_col_header(_links *h){
     a->R      = new;
     new->L    = a;
     new->R    = h;
-    new->D    = NULL;
-    new->U    = NULL;
+    new->D    = new;
+    new->U    = new;
     new->C    = h;
     new->size = 0;
     new->n    = a->n + 1;

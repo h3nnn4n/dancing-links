@@ -35,10 +35,6 @@ int main(){
 
     m = init_torus();
 
-    for ( i = 0 ; i < x ; i++){
-        insert_row_header(m);
-    }
-
     for ( i = 0 ; i < y ; i++){
         insert_col_header(m);
     }
@@ -56,16 +52,6 @@ int main(){
         t = t->R;
     }
     printf("%p -> %p = %d\n", t, t->R, t->n);
-
-    puts("--------------------");
-
-    t = m->D;
-
-    while ( t != m ) {
-        printf("%p -> %p = %d\n", t, t->D, t->n);
-        t = t->D;
-    }
-    printf("%p -> %p = %d\n", t, t->D, t->n);
 
     puts("--------------------");
 
@@ -101,10 +87,14 @@ int main(){
         a = a->R;
     }
 
-    /*puts("--------------------");*/
-    /*_ans *O = (_ans*) malloc ( sizeof(_ans) );*/
-    /*knuths_magic(m, 0, O);*/
-    /*puts("--------------------");*/
+    puts("\n\n\n--------------------");
+    /*for ( a = m->R ; a != m ; a = a->R){*/
+        /*for (b = */
+
+    puts("--------------------");
+    _ans *O = (_ans*) malloc ( sizeof(_ans) );
+    knuths_magic(m, 0, O);
+    puts("--------------------");
 
     return EXIT_SUCCESS;
 }
