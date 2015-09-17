@@ -47,22 +47,14 @@ void knuths_magic(_links *h, int k, _ans *ans){
         _links *p;
         for ( s = ans->next ; s->next != NULL ; s = s->next ){
             for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
-                if ( w == 0 ) {
-                    continue;
-                } else {
-                    printf("%d ", p->C->n > 10 ? p->C->n - 10 : p->C->n);
-                }
+                printf("%d ", p->C->n > 10 ? p->C->n - 10 : p->C->n);
             }
             puts("");
         }
 
         if ( s->next == NULL ){
             for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
-                if ( w == 0 ) {
-                    continue;
-                } else {
-                    printf("%d ", p->C->n > 10 ? p->C->n - 10 : p->C->n);
-                }
+                printf("%d ", p->C->n > 10 ? p->C->n - 10 : p->C->n);
             }
             puts("");
         }
