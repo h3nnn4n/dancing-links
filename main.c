@@ -27,8 +27,8 @@ int main(){
     int **set;
     int x, y, i, j;
 
-    x = 588;
-    y = 50;
+    fscanf(stdin, "%d", &y);
+    fscanf(stdin, "%d", &x);
 
     set = (int**) malloc ( sizeof(int*) * y );
 
