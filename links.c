@@ -5,22 +5,15 @@
 
 void cover(_links *c){
     _links *i, *j;
-    c->R->L = c->L;                         // Line 15
-    c->L->R = c->R;                         // Line 15
+    c->R->L = c->L;                                          // Line 15
+    c->L->R = c->R;                                          // Line 15
 
-    i = c->D;                               // Line 16
-
-    while ( i != c ){                       // Line 16
-        printf("%p | %p -> %p\n", c, i, i->R);
-        j = i->R;                           // Line 17
-        while ( j != i ){                   // Line 17
-            j->D->U = j->U;                 // Line 18
-            j->U->D = j->D;                 // Line 18
-            j->C->size -= 1;                // Line 19
-
-            j = j->R;                       // Line 17
+    for ( i = c->D ; i != c ; i = i->D ){                    // Line 16
+        for ( j = i->R ; j != i ; j = j->R){                 // Line 17
+            j->D->U = j->U;                                  // Line 18
+            j->U->D = j->D;                                  // Line 18
+            j->C->size -= 1;                                 // Line 19
         }
-        i = i->D;                           // Line 16
     }
 
     return;
@@ -29,87 +22,79 @@ void cover(_links *c){
 void uncover(_links *c){
     _links *i, *j;
 
-    i = c->U;                  // Line 20
-    while ( i != c ){          // Line 20
-        j = i->L;              // Line 21
-        while ( j != i ){      // Line 21
-            j->C->size += 1;   // Line 22
-            j->D->U = j;       // Line 23
-            j->U->D = j;       // Line 23
-
-            j = j->L;          // Line 21
+    for ( i = c->U ; i != c ; i = i->U ) {        // Line 20
+        for ( j = i->L ; j != i ; j = j->L ){     // Line 21
+            j->C->size += 1;                      // Line 22
+            j->D->U = j;                          // Line 23
+            j->U->D = j;                          // Line 23
         }
-
-        i = i->U;              // Line 20
     }
-    c->R->L = c;               // Line 24
-    c->L->R = c;               // Line 24
+    c->R->L = c;                                  // Line 24
+    c->L->R = c;                                  // Line 24
 
     return;
 }
 
-void knuths_magic(_links *h, int k, _ans *O){
+void knuths_magic(_links *h, int k, _ans *ans){
     _links *c;
     _links *j;
     _links *r;
 
-    /*printf("k = %d | \t %p -> %p -> %p\n", k, h, h->R, h->R->R);*/
-    if ( k != 666) {
-        _links *zz = h->R;
-        printf("k = %d | \t %p -> ", k, h);
-        while ( zz != h ){
-            printf(" %p -> ", zz);
-            zz = zz->R;
+    if ( h->R == h ) {                          // Line 1
+        printf("Solved\n");                     // Line 1
+        int w;
+        _ans *s;
+        _links *p;
+        for ( s = ans->next ; s->next != NULL ; s = s->next ){
+            for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
+                printf("%d ", p->C->n);
+            }
+            puts("");
         }
-        printf(" %p \n", zz);
 
-    }
+        if ( s->next == NULL ){
+            for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
+                printf("%d ", p->C->n);
+            }
+            puts("");
+        }
 
-    if ( h->R == h ) {                      // Line 1
-        printf("Solved\n");                 // Line 1
-        return;                             // Line 1
-    }                                       // Line 1
+        puts("--------------------");
 
-    c = h->R; // Chose a colum object       // Line 2
+        return;                                 // Line 1
+    }                                           // Line 1
 
-    cover(c);                               // Line 3
+    c = h->R; // Chose a colum object           // Line 2
+
+    cover(c);                                   // Line 3
 
     _ans *tt = (_ans*) malloc ( sizeof(_ans) ); // Storing the anserws
-    _ans *aux = O;                              //
+    _ans *aux = ans;                            //
     while (aux->next != NULL) aux = aux->next;  //
     aux->next = tt;                             //
     tt ->next = NULL;                           //
     tt ->O    = NULL;                           //
 
-    r = c->D;                               // Line 4
-    while ( r != c ){                       // Line 4
-        printf("%p -> %p\n", r, r->D);
-        tt->O = r;                          // Line 5
-        j = r->R;                           // Line 6
-        while ( j != r ){                   // Line 6
-            printf("%p -> %p\n", j, j->R);
-            cover(j);                       // Line 7
-            j = j->R;
+    for ( r = c->D ; r != c ; r = r->D ){       // Line 4
+        tt->O = r;                              // Line 5
+
+        for( j = r->R ; j != r ; j = j->R){     // Line 6
+            cover(j->C);                        // Line 7
         }
 
-        knuths_magic(h, k + 1, O);      // Line 8
+        knuths_magic(h, k + 1, ans);            // Line 8
 
-        r = tt->O;                      // Line 9
-        c =  r->C;                      // Line 9
+        r = tt->O;                              // Line 9
+        c =  r->C;                              // Line 9
 
-        j = r->L;                       // Line 10
-        while ( j != r ){               // Line 10
-
-            uncover(j);                 // Line 11
-
-            j = j->L;                   // Line 10
+        for (j = r->L ; j != r ; j = j->L){     // Line 10
+            uncover(j->C);                      // Line 11
         }
-        r = r->D;                       // Line 4
     }
 
-    uncover(c);                         // Line 12
+    uncover(c);                                 // Line 12
 
-    aux = O;
+    aux = ans;
     while (aux->next->next != NULL && aux->next != NULL){
         aux = aux->next;
     }
@@ -137,63 +122,40 @@ _links *init_torus(){
 
 void build_links_for_dancing(_links *h, int *m, int x, int y){
     int i, j;
-    _links *a, *b;
+    _links *a;
+    _links *first;
+    _links *t;
 
-    for ( j = 0, b = h->D ; j < x ; j++, b = b->D ){
-        _links *ta, *tb;
-        ta = NULL;
-        for ( i = 0, a = h->R ; i < y ; i++, a = a->R ){
-            if ( m[i * x + j] == 1){
-                _links *t1, *t2;
+    for ( j = 0 ; j < y ; j++ ){
+        for ( i = 0, a = h->R, first = NULL ; i < x ; i++, a = a->R){
+            if ( m[i + j*x] == 1){
+                for ( t = a->D; t != a; t = t->D );
+
                 _links *new = (_links*) malloc ( sizeof(_links) );
-                t1 = a;
-                t2 = b;
 
-                while ( t1->D != NULL ){
-                    t1 = t1->D;
+                _links *tt = t->D;
+                t->D   = new;
+                new->D = tt;
+                tt->U  = new;
+                new->U = t;
+                new->R = t;
+                new->C = a;
+                new->n = i;
+
+                if ( first == NULL ){
+                    new->R = new;
+                    new->L = new;
+                    first  = new;
+                } else {
+                    tt       = first->L;
+                    first->L = new;
+                    new->L   = tt;
+                    tt->R    = new;
+                    new->R   = first;
+
                 }
-
-                while ( t2->R != NULL ){
-                    t2 = t2->R;
-                }
-
-                t1->D    = new;
-                t2->R    = new;
-                new->D   = NULL;
-                new->R   = NULL;
-                new->L   = t2;
-                new->U   = t1;
-                new->C   = a;
-                new->n   = 1;
-                ta       = new;
-            }
+            } 
         }
-        tb = ta;
-        while ( tb->L != NULL ){
-            tb = tb->L;
-        }
-        tb->L = ta;
-        ta->R = tb;
-    }
-
-    for ( i = 0, a = h->R ; i < y ; i++, a = a->R ){
-        _links *t;
-        t = a;
-
-        while ( t->D != NULL ){
-            t = t->D;
-        }
-
-        t->D = a;
-        a->U = t;
-    }
-
-    b = h->D;
-
-    while ( b != h ){
-        b->L->R = b->R;
-        b->R->L = b->L;
-        b = b->D;
     }
 
     return;
@@ -208,8 +170,8 @@ void insert_col_header(_links *h){
     a->R      = new;
     new->L    = a;
     new->R    = h;
-    new->D    = NULL;
-    new->U    = NULL;
+    new->D    = new;
+    new->U    = new;
     new->C    = h;
     new->size = 0;
     new->n    = a->n + 1;

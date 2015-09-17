@@ -24,22 +24,15 @@
 
 int main(){
     _links *m;
-    /*int set[42] = { 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1};*/
-    int set[9] = {0, 0, 1,
-                  1, 1, 1,
-                  1, 0, 0};
+    int set[42] = { 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1};
 
     int x, y, i;
-    x = 3;
-    y = 3;
+    x = 7;
+    y = 6;
 
     m = init_torus();
 
     for ( i = 0 ; i < x ; i++){
-        insert_row_header(m);
-    }
-
-    for ( i = 0 ; i < y ; i++){
         insert_col_header(m);
     }
 
@@ -47,64 +40,10 @@ int main(){
 
     puts("--------------------");
 
-    _links *t;
-
-    t = m->R;
-
-    while ( t != m ) {
-        printf("%p -> %p = %d\n", t, t->R, t->n);
-        t = t->R;
-    }
-    printf("%p -> %p = %d\n", t, t->R, t->n);
-
     puts("--------------------");
-
-    t = m->D;
-
-    while ( t != m ) {
-        printf("%p -> %p = %d\n", t, t->D, t->n);
-        t = t->D;
-    }
-    printf("%p -> %p = %d\n", t, t->D, t->n);
-
+    _ans *O = (_ans*) malloc ( sizeof(_ans) );
+    knuths_magic(m, 0, O);
     puts("--------------------");
-
-    _links *a, *b;
-
-    a = m->R;
-
-    while ( a != m ){
-        b = a->D;
-        while ( b != a ){
-            printf("%d ", 1);
-            b = b->D;
-        }
-        a = a->R;
-        puts("");
-    }
-
-    puts("--------------------");
-
-    a = m->R;
-    while ( a != m ){
-        b = a->D;
-        while (b != a){
-            t = b->R;
-            printf("%p -> %p -> %p = %d\n", b, b->D, b->D->D, 1);
-            while (t != b){
-                /*printf("%p -> %p = %d\n", t, t->D, t->n);*/
-                t = t->R;
-            }
-            b = b->D;
-        }
-        puts("--------------------");
-        a = a->R;
-    }
-
-    /*puts("--------------------");*/
-    /*_ans *O = (_ans*) malloc ( sizeof(_ans) );*/
-    /*knuths_magic(m, 0, O);*/
-    /*puts("--------------------");*/
 
     return EXIT_SUCCESS;
 }
