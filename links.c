@@ -47,14 +47,22 @@ void knuths_magic(_links *h, int k, _ans *ans){
         _links *p;
         for ( s = ans->next ; s->next != NULL ; s = s->next ){
             for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
-                printf("%d ", p->C->n);
+                if ( w == 0 ) {
+                    continue;
+                } else {
+                    printf("%d ", p->C->n > 10 ? p->C->n - 10 : p->C->n);
+                }
             }
             puts("");
         }
 
         if ( s->next == NULL ){
             for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
-                printf("%d ", p->C->n);
+                if ( w == 0 ) {
+                    continue;
+                } else {
+                    printf("%d ", p->C->n > 10 ? p->C->n - 10 : p->C->n);
+                }
             }
             puts("");
         }
@@ -120,15 +128,15 @@ _links *init_torus(){
     return p;
 }
 
-void build_links_for_dancing(_links *h, int *m, int x, int y){
+void build_links_for_dancing(_links *h, int **m, int x, int y){
     int i, j;
     _links *a;
     _links *first;
     _links *t;
 
-    for ( j = 0 ; j < y ; j++ ){
-        for ( i = 0, a = h->R, first = NULL ; i < x ; i++, a = a->R){
-            if ( m[i + j*x] == 1){
+    for ( j = 0 ; j < x ; j++ ){
+        for ( i = 0, a = h->R, first = NULL ; i < y ; i++, a = a->R){
+            if ( m[i][j] == 1){
                 for ( t = a->D; t != a; t = t->D );
 
                 _links *new = (_links*) malloc ( sizeof(_links) );
