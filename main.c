@@ -40,54 +40,6 @@ int main(){
 
     puts("--------------------");
 
-    _links *t;
-
-    t = m->R;
-
-    while ( t != m ) {
-        printf("%p -> %p = %d\n", t, t->R, t->n);
-        t = t->R;
-    }
-    printf("%p -> %p = %d\n", t, t->R, t->n);
-
-    puts("--------------------");
-
-    _links *a, *b;
-
-    a = m->R;
-
-    while ( a != m ){
-        b = a->D;
-        while ( b != a ){
-            printf("%d ", 1);
-            b = b->D;
-        }
-        a = a->R;
-        puts("");
-    }
-
-    puts("--------------------");
-
-    a = m->R;
-    while ( a != m ){
-        b = a->D;
-        while (b != a){
-            t = b->R;
-            printf("%p -> %p -> %p = %d\n", b, b->D, b->D->D, 1);
-            while (t != b){
-                /*printf("%p -> %p = %d\n", t, t->D, t->n);*/
-                t = t->R;
-            }
-            b = b->D;
-        }
-        puts("--------------------");
-        a = a->R;
-    }
-
-    puts("\n\n\n--------------------");
-    /*for ( a = m->R ; a != m ; a = a->R){*/
-        /*for (b = */
-
     puts("--------------------");
     _ans *O = (_ans*) malloc ( sizeof(_ans) );
     knuths_magic(m, 0, O);
