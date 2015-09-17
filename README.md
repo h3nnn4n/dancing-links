@@ -1,5 +1,4 @@
 # Dancing-Links
-===============
 C implementation of Knuth's dancing links algorithm acording to his article: [Dancing Links](https://www.ocf.berkeley.edu/~jchu/publicportal/sudoku/0011047.pdf).
 The purpose to Knuth's algorithm is to solve the Exact Set Cover.
 
@@ -8,7 +7,6 @@ Many problems can be solved as an exact set cover, such as polyminos, sudoku and
 See the wikipedia [page](https://en.wikipedia.org/wiki/Exact_cover) for more details.
 
 # Usage
--------
 
 `maker.jl` is a [Julia](http://julialang.org/) code that writes the polymino as an exact set cover problem.
 One can also pipe some other exact set cover instance to the binary.
@@ -26,7 +24,6 @@ julia maker.jl | ./dlx
 ```
 
 # License
----------
 
 See `LICENSE` for details.
 
