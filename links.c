@@ -35,21 +35,31 @@ void uncover(_links *c){
     return;
 }
 
-void knuths_magic(_links *h, int k, _ans *O){
+void knuths_magic(_links *h, int k, _ans *ans){
     _links *c;
     _links *j;
     _links *r;
 
-    if ( k != 666) {
-        _links *zz = h->R;
-        while ( zz != h ){
-            zz = zz->R;
-        }
-
-    }
-
     if ( h->R == h ) {                          // Line 1
         printf("Solved\n");                     // Line 1
+        int w;
+        _ans *s;
+        _links *p;
+        for ( s = ans->next ; s->next != NULL ; s = s->next ){
+            for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
+                printf("%d ", p->C->n);
+            }
+            puts("");
+        }
+
+        if ( s->next == NULL ){
+            for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
+                printf("%d ", p->C->n);
+            }
+            puts("");
+        }
+
+        puts("--------------------");
 
         return;                                 // Line 1
     }                                           // Line 1
@@ -59,7 +69,7 @@ void knuths_magic(_links *h, int k, _ans *O){
     cover(c);                                   // Line 3
 
     _ans *tt = (_ans*) malloc ( sizeof(_ans) ); // Storing the anserws
-    _ans *aux = O;                              //
+    _ans *aux = ans;                            //
     while (aux->next != NULL) aux = aux->next;  //
     aux->next = tt;                             //
     tt ->next = NULL;                           //
@@ -72,7 +82,7 @@ void knuths_magic(_links *h, int k, _ans *O){
             cover(j->C);                        // Line 7
         }
 
-        knuths_magic(h, k + 1, O);              // Line 8
+        knuths_magic(h, k + 1, ans);            // Line 8
 
         r = tt->O;                              // Line 9
         c =  r->C;                              // Line 9
@@ -84,7 +94,7 @@ void knuths_magic(_links *h, int k, _ans *O){
 
     uncover(c);                                 // Line 12
 
-    aux = O;
+    aux = ans;
     while (aux->next->next != NULL && aux->next != NULL){
         aux = aux->next;
     }
