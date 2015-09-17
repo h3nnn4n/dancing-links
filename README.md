@@ -23,6 +23,10 @@ or
 julia maker.jl | ./dlx
 ```
 
+
+
+Each solution found (if any) will be in a separate block.
+
 # License
 
 See `LICENSE` for details.
