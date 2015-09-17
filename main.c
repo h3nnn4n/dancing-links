@@ -24,21 +24,30 @@
 
 int main(){
     _links *m;
-    int set[42] = { 0, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0, 1, 0, 1, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1};
+    int **set;
+    int x, y, i, j;
 
-    int x, y, i;
-    x = 7;
-    y = 6;
+    x = 588;
+    y = 50;
+
+    set = (int**) malloc ( sizeof(int*) * y );
 
     m = init_torus();
 
-    for ( i = 0 ; i < x ; i++){
+    for ( i = 0 ; i < y ; i++){
         insert_col_header(m);
+        set[i] = (int*) malloc ( sizeof(int) * x );
     }
 
-    build_links_for_dancing(m, set, x, y);
+    for ( i = 0 ; i < x ; i++){
+        for ( j = 0 ; j < y ; j++){
+            fscanf(stdin, "%d", &set[j][i]);
+        }
+    }
 
     puts("--------------------");
+
+    build_links_for_dancing(m, set, x, y);
 
     puts("--------------------");
     _ans *O = (_ans*) malloc ( sizeof(_ans) );
