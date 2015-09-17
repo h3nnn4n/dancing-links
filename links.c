@@ -35,7 +35,7 @@ void uncover(_links *c){
     return;
 }
 
-void knuths_magic(_links *h, int k, _ans *ans){
+void dancing_links(_links *h, int k, _ans *ans){
     _links *c;
     _links *j;
     _links *r;
@@ -82,7 +82,7 @@ void knuths_magic(_links *h, int k, _ans *ans){
             cover(j->C);                        // Line 7
         }
 
-        knuths_magic(h, k + 1, ans);            // Line 8
+        dancing_links(h, k + 1, ans);            // Line 8
 
         r = tt->O;                              // Line 9
         c =  r->C;                              // Line 9
@@ -152,9 +152,8 @@ void build_links_for_dancing(_links *h, int **m, int x, int y){
                     new->L   = tt;
                     tt->R    = new;
                     new->R   = first;
-
                 }
-            } 
+            }
         }
     }
 
@@ -179,23 +178,3 @@ void insert_col_header(_links *h){
 
     return;
 }
-
-void insert_row_header(_links *h){
-    _links *new = (_links*) malloc ( sizeof(_links) );
-    _links *a;
-
-    a         = h->U;
-    h->U      = new;
-    a->D      = new;
-    new->L    = NULL;
-    new->R    = NULL;
-    new->D    = h;
-    new->U    = a;
-    new->C    = h;
-    new->size = 0;
-    new->n    = a->n + 1;
-    new->name = NULL;
-
-    return;
-}
-

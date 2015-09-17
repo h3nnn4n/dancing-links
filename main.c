@@ -51,7 +51,7 @@ int main(){
 
     puts("--------------------");
     _ans *O = (_ans*) malloc ( sizeof(_ans) );
-    knuths_magic(m, 0, O);
+    dancing_links(m, 0, O);
     puts("--------------------");
 
     return EXIT_SUCCESS;
