@@ -23,9 +23,9 @@ or
 julia maker.jl | ./dlx
 ```
 
-
-
-Each solution found (if any) will be in a separate block.
+Each solution found (if any) will be in a separate block. Each line is an line of the matrix
+that was used in a given solution and each column in the output contains the number of the column
+in the matrix.
 
 # License
 
