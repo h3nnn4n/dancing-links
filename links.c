@@ -4,6 +4,7 @@
 #include "links.h"
 
 unsigned long int branchs;
+unsigned long int solutions_found;
 
 void cover(_links *c){
     _links *i, *j;
@@ -46,7 +47,9 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
     int s;
 
     if ( h->R == h ) {                              // Line 1
+        solutions_found++;
         printf("Solved. Took %lu steps\n", branchs); // Line 1
+        printf("Found %lu solutions\n", solutions_found);
         int w;
         _ans *s;
         _links *p;
