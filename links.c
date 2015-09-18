@@ -68,6 +68,8 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
         return;                                 // Line 1
     }                                           // Line 1
 
+    c = h->R; // Chose a colum object           // Line 2
+
 #ifdef __USE_HEURISTIC
     int s = 1<<24;                              //
     for ( j = h->R ; j != h ; j = j->R ){       // Line 13
@@ -76,8 +78,6 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
             s = j->size;                        // Line 14
         }                                       // Line 14
     }                                           // Line 13
-#else
-    c = h->R; // Chose a colum object           // Line 2
 #endif
 
     cover(c);                                   // Line 3
