@@ -22,10 +22,15 @@
 
 #include "links.h"
 
+
 int main(){
     _links *m;
     int **set;
     int x, y, i, j, n;
+
+    extern int branchs;
+
+    branchs = 0;
 
     fscanf(stdin, "%d", &y);
     fscanf(stdin, "%d", &x);

@@ -1,6 +1,12 @@
 #ifndef __DANCING_LINKS
 #define __DANCING_LINKS
 
+// If __USE_HEURISTIC is set an heristic will be used to select which column to explore first.
+// Otherwise it will use the leftmost uncovered column.
+// The heuristic consists of exploring first the node that lead to the fewest branchs.
+// This process is explained on Knuth's paper at page 6.
+#define __USE_HEURISTIC
+
 typedef struct __links {
     struct __links *L;
     struct __links *R;

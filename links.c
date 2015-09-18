@@ -3,10 +3,14 @@
 
 #include "links.h"
 
+int branchs;
+
 void cover(_links *c){
     _links *i, *j;
     c->R->L = c->L;                                          // Line 15
     c->L->R = c->R;                                          // Line 15
+
+    branchs++;
 
     for ( i = c->D ; i != c ; i = i->D ){                    // Line 16
         for ( j = i->R ; j != i ; j = j->R){                 // Line 17
@@ -40,8 +44,8 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
     _links *j;
     _links *r;
 
-    if ( h->R == h ) {                          // Line 1
-        printf("Solved\n");                     // Line 1
+    if ( h->R == h ) {                              // Line 1
+        printf("Solved. Took %d steps\n", branchs); // Line 1
         int w;
         _ans *s;
         _links *p;
@@ -64,7 +68,17 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
         return;                                 // Line 1
     }                                           // Line 1
 
+#ifdef __USE_HEURISTIC
+    int s = 1<<24;                              //
+    for ( j = h->R ; j != h ; j = j->R ){       // Line 13
+        if (j->size < s){                       // Line 14
+            c = j;                              // Line 14
+            s = j->size;                        // Line 14
+        }                                       // Line 14
+    }                                           // Line 13
+#else
     c = h->R; // Chose a colum object           // Line 2
+#endif
 
     cover(c);                                   // Line 3
 
