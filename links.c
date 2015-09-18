@@ -43,6 +43,7 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
     _links *c;
     _links *j;
     _links *r;
+    int s;
 
     if ( h->R == h ) {                              // Line 1
         printf("Solved. Took %d steps\n", branchs); // Line 1
@@ -69,9 +70,9 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
     }                                           // Line 1
 
     c = h->R; // Chose a colum object           // Line 2
+    s = h->R->size;
 
 #ifdef __USE_HEURISTIC
-    int s = 1<<24;                              //
     for ( j = h->R ; j != h ; j = j->R ){       // Line 13
         if (j->size < s){                       // Line 14
             c = j;                              // Line 14
