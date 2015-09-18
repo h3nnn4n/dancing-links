@@ -35,7 +35,7 @@ void uncover(_links *c){
     return;
 }
 
-void dancing_links(_links *h, int k, _ans *ans){
+void dancing_links(_links *h, int k, _ans *ans, int n){
     _links *c;
     _links *j;
     _links *r;
@@ -47,14 +47,14 @@ void dancing_links(_links *h, int k, _ans *ans){
         _links *p;
         for ( s = ans->next ; s->next != NULL ; s = s->next ){
             for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
-                printf("%d ", p->C->n > 10 ? p->C->n - 10 : p->C->n);
+                printf("%d ", p->C->n > n ? p->C->n - n : p->C->n);
             }
             puts("");
         }
 
         if ( s->next == NULL ){
             for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
-                printf("%d ", p->C->n > 10 ? p->C->n - 10 : p->C->n);
+                printf("%d ", p->C->n > n ? p->C->n - n : p->C->n);
             }
             puts("");
         }
@@ -82,7 +82,7 @@ void dancing_links(_links *h, int k, _ans *ans){
             cover(j->C);                        // Line 7
         }
 
-        dancing_links(h, k + 1, ans);            // Line 8
+        dancing_links(h, k + 1, ans, n);        // Line 8
 
         r = tt->O;                              // Line 9
         c =  r->C;                              // Line 9

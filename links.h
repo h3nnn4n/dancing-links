@@ -28,7 +28,7 @@ void    insert_col_header(_links *);
 void    build_links_for_dancing(_links *h, int **m, int x, int y);
 
 // Knuth's dancing links(DLX) implementation. See Knuth's paper on page 5
-void    dancing_links(_links *, int, _ans *);
+void    dancing_links(_links *, int, _ans *, int n);
 
 // Covers a column. This process is described on Knuth's paper page 6.
 void    cover(_links *c);

@@ -25,10 +25,11 @@
 int main(){
     _links *m;
     int **set;
-    int x, y, i, j;
+    int x, y, i, j, n;
 
     fscanf(stdin, "%d", &y);
     fscanf(stdin, "%d", &x);
+    fscanf(stdin, "%d", &n);
 
     set = (int**) malloc ( sizeof(int*) * y );
 
@@ -51,7 +52,7 @@ int main(){
 
     puts("--------------------");
     _ans *O = (_ans*) malloc ( sizeof(_ans) );
-    dancing_links(m, 0, O);
+    dancing_links(m, 0, O, n);
     puts("--------------------");
 
     return EXIT_SUCCESS;
