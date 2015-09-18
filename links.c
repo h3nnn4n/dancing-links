@@ -3,7 +3,7 @@
 
 #include "links.h"
 
-int branchs;
+unsigned long int branchs;
 
 void cover(_links *c){
     _links *i, *j;
@@ -46,20 +46,24 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
     int s;
 
     if ( h->R == h ) {                              // Line 1
-        printf("Solved. Took %d steps\n", branchs); // Line 1
+        printf("Solved. Took %lu steps\n", branchs); // Line 1
         int w;
         _ans *s;
         _links *p;
         for ( s = ans->next ; s->next != NULL ; s = s->next ){
-            for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
-                printf("%d ", p->C->n > n ? p->C->n - n : p->C->n);
+            for (p = s->O, w = 0 ; (p != s->O || w == 0) && p->C->n > n ; p = p->R, w++ );
+            c = p;
+            for (w = 0 ; p != c || w == 0 ; p = p->R, w++ ){
+                printf("%2.d ", p->C->n > n ? p->C->n - n : p->C->n);
             }
             puts("");
         }
 
         if ( s->next == NULL ){
-            for (p = s->O, w = 0 ; p != s->O || w == 0 ; p = p->R, w++ ){
-                printf("%d ", p->C->n > n ? p->C->n - n : p->C->n);
+            for (p = s->O, w = 0 ; (p != s->O || w == 0) && p->C->n > n ; p = p->R, w++ );
+            c = p;
+            for (w = 0 ; p != c || w == 0 ; p = p->R, w++ ){
+                printf("%2.d ", p->C->n > n ? p->C->n - n : p->C->n);
             }
             puts("");
         }
@@ -70,7 +74,7 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
     }                                           // Line 1
 
     c = h->R; // Chose a colum object           // Line 2
-    s = h->R->size;
+    s = c->size;
 
 #ifdef __USE_HEURISTIC
     for ( j = h->R ; j != h ; j = j->R ){       // Line 13

@@ -28,7 +28,7 @@ int main(){
     int **set;
     int x, y, i, j, n;
 
-    extern int branchs;
+    extern unsigned long int branchs;
 
     branchs = 0;
 
