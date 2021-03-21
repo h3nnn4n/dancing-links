@@ -26,6 +26,3 @@ jobs:
 
       - name: run cppcheck
         run: cppcheck --enable=all --std=c11 --language=c --error-exitcode=1  src/*.c
-
-      - name: run cppcheck with bug-hunting
-        run: cppcheck --enable=all --std=c11 --language=c --error-exitcode=1 --bug-hunting src/*.c
