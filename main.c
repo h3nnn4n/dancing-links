@@ -19,11 +19,52 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <getopt.h>
 
 #include "links.h"
+#include "config.h"
 
+struct option long_options[] = {
+    {"single-solution", no_argument, &single_solution, 1},
+    {"multiple-solutions", no_argument, &single_solution, 0},
+    {"file", required_argument, 0, 'f'},
+    {0, 0, 0, 0}};
 
-int main(){
+int main(int argc, char **argv){
+
+    while (1) {
+        int c;
+        int option_index = 0;
+
+        c = getopt_long(argc, argv, "abc:d:f:", long_options, &option_index);
+
+        if (c == -1)
+            break;
+
+        switch (c) {
+            case 0:
+                if (long_options[option_index].flag != 0)
+                    break;
+
+                printf("option %s", long_options[option_index].name);
+                if (optarg)
+                    printf(" with arg %s", optarg);
+
+                printf("\n");
+                break;
+
+            case 'f':
+                // TODO: Read from file
+                break;
+
+            case '?':
+                /* getopt_long already printed an error message. */
+                break;
+
+            default: abort();
+        }
+    }
+
     _links *m;
     int **set;
     int x, y, i, j, n;
@@ -55,11 +96,16 @@ int main(){
 
     puts("--------------------");
 
+    printf("Building in-memory model\n");
     build_links_for_dancing(m, set, x, y);
 
     puts("--------------------");
+    printf("Starting solve process\n");
+    puts("--------------------");
+
     _ans *O = (_ans*) malloc ( sizeof(_ans) );
     dancing_links(m, 0, O, n);
+
     puts("--------------------");
 
     return EXIT_SUCCESS;

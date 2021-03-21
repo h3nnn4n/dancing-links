@@ -1,6 +1,6 @@
 CC=gcc
 CFLAGS=-lm -Wall
-SOURCES=links.c main.c
+SOURCES=links.c main.c config.c
 BIN=dlx
 
 all:

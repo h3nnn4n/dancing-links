@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "links.h"
+#include "config.h"
 
 unsigned long int branchs;
 unsigned long int solutions_found;
@@ -48,6 +49,7 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
 
     if ( h->R == h ) {                              // Line 1
         solutions_found++;
+        first_solution_found = 1;
         printf("Solved. Took %lu steps\n", branchs); // Line 1
         printf("Found %lu solutions\n", solutions_found);
         int w;
@@ -112,6 +114,8 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
         for (j = r->L ; j != r ; j = j->L){     // Line 10
             uncover(j->C);                      // Line 11
         }
+
+        if (single_solution && first_solution_found) return;
     }
 
     uncover(c);                                 // Line 12
