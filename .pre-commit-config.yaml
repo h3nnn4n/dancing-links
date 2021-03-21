@@ -11,3 +11,10 @@ repos:
     rev: 62302476d0da01515660132d76902359bed0f782
     hooks:
     -   id: clang-format
+
+repos:
+  - repo: https://github.com/pocc/pre-commit-hooks
+    rev: python
+    hooks:
+      - id: clang-tidy
+        args: [-checks=clang-diagnostic-return-type]
