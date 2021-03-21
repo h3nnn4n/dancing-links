@@ -34,3 +34,6 @@
 # Output binary
 dlx
 dancing-links
+
+# Build folder
+build
