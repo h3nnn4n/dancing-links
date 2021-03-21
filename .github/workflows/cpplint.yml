@@ -13,7 +13,9 @@ jobs:
           submodules: true
 
       - name: Install deps
-        run: python3 -m pip install cpplint
+        run: |
+          python3 -m pip install cpplint
+          python3 -m pip install scan-build
 
       - name: Update compile database
         run: |
