@@ -43,8 +43,8 @@ typedef struct __ans {
     struct __links *O;
 } _ans;
 
-uint64_t branchs;
-uint64_t solutions_found;
+extern uint64_t branchs;
+extern uint64_t solutions_found;
 
 // Initializes and empty structure
 _links *init_torus();
