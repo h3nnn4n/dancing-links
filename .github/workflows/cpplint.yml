@@ -23,4 +23,4 @@ jobs:
           intercept-build make
 
       - name: run cpplint
-        run: cpplint --filter=-build/include_subdir,-readability/nolint,-whitespace/line_length,-readability/casting src/*.c
+        run: cpplint --filter=-build/include_subdir,-readability/nolint,-whitespace/line_length,-readability/casting,-build/header_guard src/*.c

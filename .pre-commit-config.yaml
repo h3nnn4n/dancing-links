@@ -26,5 +26,5 @@ repos:
     hooks:
     -   id: cpplint
         args:
-        - --filter=-build/include_subdir,-readability/nolint,-whitespace/line_length,-readability/casting
+        - --filter=-build/include_subdir,-readability/nolint,-whitespace/line_length,-readability/casting,-build/header_guard
     -   id: cppcheck
