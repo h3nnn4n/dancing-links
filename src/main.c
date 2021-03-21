@@ -67,7 +67,11 @@ int main(int argc, char **argv) {
 
     _links *m;
     int **  set;
-    int     x, y, i, j, n;
+    int     x = 0;
+    int     y = 0;
+    int     i = 0;
+    int     j = 0;
+    int     n = 0;
 
     branchs         = 0;
     solutions_found = 0;
