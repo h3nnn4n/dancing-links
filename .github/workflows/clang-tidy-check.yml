@@ -25,4 +25,4 @@ jobs:
           intercept-build make
 
       - name: run clang-tidy
-        run: clang-tidy src/**/*.{c,h} --warnings-as-errors --checks=bugprone-*,performance-*,readability-*,portability-*,modernize-*,clang-analyzer-cplusplus-*,clang-analyzer-*,cppcoreguidelines-*
+        run: clang-tidy src/*.c --warnings-as-errors --checks=bugprone-*,performance-*,readability-*,portability-*,modernize-*,clang-analyzer-cplusplus-*,clang-analyzer-*,cppcoreguidelines-*
