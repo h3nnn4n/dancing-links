@@ -72,9 +72,9 @@ int main(int argc, char **argv) {
     branchs         = 0;
     solutions_found = 0;
 
-    fscanf(stdin, "%d", &y);
-    fscanf(stdin, "%d", &x);
-    fscanf(stdin, "%d", &n);
+    fscanf(stdin, "%d", &y); // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fscanf(stdin, "%d", &x); // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fscanf(stdin, "%d", &n); // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
 
     set = (int **)malloc(sizeof(int *) * y);
 
@@ -87,6 +87,7 @@ int main(int argc, char **argv) {
 
     for (i = 0; i < x; i++) {
         for (j = 0; j < y; j++) {
+            // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
             fscanf(stdin, "%d", &set[j][i]);
         }
     }
