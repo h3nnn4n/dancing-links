@@ -92,25 +92,25 @@ int main(int argc, char **argv) {
         }
     }
 
-    if (!quiet)
+    if (!quiet) {
         puts("--------------------");
-
-    if (!quiet)
         printf("Building in-memory model\n");
+    }
+
     build_links_for_dancing(m, set, x, y);
 
-    if (!quiet)
+    if (!quiet) {
         puts("--------------------");
-    if (!quiet)
         printf("Starting solve process\n");
-    if (!quiet)
         puts("--------------------");
+    }
 
     _ans *O = (_ans *)malloc(sizeof(_ans));
     dancing_links(m, 0, O, n);
 
-    if (!quiet)
+    if (!quiet) {
         puts("--------------------");
+    }
 
     return EXIT_SUCCESS;
 }
