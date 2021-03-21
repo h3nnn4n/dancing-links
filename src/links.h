@@ -1,5 +1,24 @@
+/*
+ * Copyright (C) 2015,2021  h3nnn4n, aka Renan S. Silva
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 #ifndef __DANCING_LINKS
 #define __DANCING_LINKS
+
+#include <stdint.h>
 
 // If __USE_HEURISTIC is set an heristic will be used to select which column to
 // explore first. Otherwise it will use the leftmost uncovered column. The
@@ -24,8 +43,8 @@ typedef struct __ans {
     struct __links *O;
 } _ans;
 
-extern unsigned long branchs;
-extern unsigned long solutions_found;
+uint64_t branchs;
+uint64_t solutions_found;
 
 // Initializes and empty structure
 _links *init_torus();

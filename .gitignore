@@ -37,3 +37,6 @@ dancing-links
 
 # Build folder
 build
+
+# Cache files
+.cache # used by clang

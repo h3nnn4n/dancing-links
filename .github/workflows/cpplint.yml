@@ -1,0 +1,26 @@
+name: cpplint
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - name: Install deps
+        run: |
+          python3 -m pip install cpplint
+          python3 -m pip install scan-build
+
+      - name: Update compile database
+        run: |
+          make clean
+          intercept-build make
+
+      - name: run cpplint
+        run: cpplint --filter=-build/include_subdir,-readability/nolint,-whitespace/line_length,-readability/casting,-build/header_guard src/*.c
