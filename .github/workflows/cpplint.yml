@@ -1,0 +1,26 @@
+name: cpplint
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - name: Install deps
+        run: |
+          sudo apt-get update
+          sudo apt-get -y -qq install clang cpplint
+
+      - name: Update compile database
+        run: |
+          make clean
+          intercept-build make
+
+      - name: run cpplint
+        run: cpplint --filter=-build/include_subdir,-readability/nolint,-whitespace/line_length src/*.c
