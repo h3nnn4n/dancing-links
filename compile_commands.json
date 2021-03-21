@@ -1,0 +1,56 @@
+[
+ {
+  "directory": "/home/h3nnn4n/progs/dancing-links",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Wextra",
+   "-pedantic",
+   "-std=gnu11",
+   "-O3",
+   "-Isrc",
+   "-Ideps/Unity/src",
+   "-o",
+   "/home/h3nnn4n/progs/dancing-links/build/src/config.o",
+   "-c",
+   "src/config.c"
+  ],
+  "file": "src/config.c"
+ },
+ {
+  "directory": "/home/h3nnn4n/progs/dancing-links",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Wextra",
+   "-pedantic",
+   "-std=gnu11",
+   "-O3",
+   "-Isrc",
+   "-Ideps/Unity/src",
+   "-o",
+   "/home/h3nnn4n/progs/dancing-links/build/src/links.o",
+   "-c",
+   "src/links.c"
+  ],
+  "file": "src/links.c"
+ },
+ {
+  "directory": "/home/h3nnn4n/progs/dancing-links",
+  "arguments": [
+   "gcc",
+   "-Wall",
+   "-Wextra",
+   "-pedantic",
+   "-std=gnu11",
+   "-O3",
+   "-Isrc",
+   "-Ideps/Unity/src",
+   "-o",
+   "/home/h3nnn4n/progs/dancing-links/build/src/main.o",
+   "-c",
+   "src/main.c"
+  ],
+  "file": "src/main.c"
+ }
+]
