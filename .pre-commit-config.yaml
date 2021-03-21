@@ -19,3 +19,9 @@ repos:
     -   id: clang-tidy
         args:
         - -checks=clang-diagnostic-return-type
+
+- repo: https://gitlab.com/daverona/pre-commit/cpp
+  rev: 0.8.0
+  hooks:
+  - id: cpplint
+  - id: cppcheck
