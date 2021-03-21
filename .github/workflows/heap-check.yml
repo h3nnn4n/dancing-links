@@ -1,0 +1,26 @@
+name: Memory leak check
+
+on: push
+
+jobs:
+  heapcheck-solve:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - name: Install gproftools
+        run: |
+          sudo apt-get install -y google-perftools libgoogle-perftools-dev
+          sudo ln -s /usr/lib/x86_64-linux-gnu/libtcmalloc.so /usr/lib/libtcmalloc.so
+
+      - name: Build
+        run: make gperftools
+
+      - name: Detect Leaks on single solve
+        run: ./dancing-links --single-solution --quited < samples/5x8_2xAll_freePieces.dat
+        env:
+          HEAPCHECK: normal
