@@ -87,7 +87,7 @@ void test_multiple_solutions_solve() {
   TEST_ASSERT_EQUAL(solutions_found, 240);
 }
 
-void setUp() {}
+void setUp() { quiet = 1; }
 void tearDown() {}
 
 int main() {

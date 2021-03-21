@@ -50,8 +50,14 @@ void dancing_links(_links *h, int k, _ans *ans, int n){
     if ( h->R == h ) {                              // Line 1
         solutions_found++;
         first_solution_found = 1;
+
+        if (quiet) {
+            return;
+        }
+
         printf("Solved. Took %lu steps\n", branchs); // Line 1
         printf("Found %lu solutions\n", solutions_found);
+
         int w;
         _ans *s;
         _links *p;

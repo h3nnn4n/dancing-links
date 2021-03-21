@@ -25,6 +25,7 @@
 #include "config.h"
 
 struct option long_options[] = {
+    {"quiet", no_argument, &quiet, 1},
     {"single-solution", no_argument, &single_solution, 1},
     {"multiple-solutions", no_argument, &single_solution, 0},
     {"file", required_argument, 0, 'f'},
@@ -91,19 +92,19 @@ int main(int argc, char **argv){
         }
     }
 
-    puts("--------------------");
+    if (!quiet) puts("--------------------");
 
-    printf("Building in-memory model\n");
+    if (!quiet) printf("Building in-memory model\n");
     build_links_for_dancing(m, set, x, y);
 
-    puts("--------------------");
-    printf("Starting solve process\n");
-    puts("--------------------");
+    if (!quiet) puts("--------------------");
+    if (!quiet) printf("Starting solve process\n");
+    if (!quiet) puts("--------------------");
 
     _ans *O = (_ans*) malloc ( sizeof(_ans) );
     dancing_links(m, 0, O, n);
 
-    puts("--------------------");
+    if (!quiet) puts("--------------------");
 
     return EXIT_SUCCESS;
 }
