@@ -20,4 +20,4 @@ jobs:
         run: make
 
       - name: Run simple problem
-        run: ./dlx < samples/samples/5x5_5_pentoI.dat
+        run: ./dlx < samples/5x5_5_pentoI.dat
