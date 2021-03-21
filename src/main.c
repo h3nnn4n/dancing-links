@@ -29,7 +29,6 @@ struct option long_options[] = {{"quiet", no_argument, &quiet, 1},
                                 {0, 0, 0, 0}};
 
 int main(int argc, char **argv) {
-
     while (1) {
         int c;
         int option_index = 0;

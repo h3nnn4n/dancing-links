@@ -20,8 +20,11 @@ repos:
         args:
         - -checks=clang-diagnostic-return-type
 
-- repo: https://gitlab.com/daverona/pre-commit/cpp
-  rev: 0.8.0
-  hooks:
-  - id: cpplint
-  - id: cppcheck
+repos:
+-   repo: https://github.com/bmorcos/pre-commit-hooks-cpp
+    rev: 9a5aa38207bf557961110d6a4f7e3a9d352911f9
+    hooks:
+    -   id: cpplint
+        args:
+        - --filter=-build/include_subdir,-readability/nolint,-whitespace/line_length
+    -   id: cppcheck
