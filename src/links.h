@@ -18,6 +18,8 @@
 #ifndef __DANCING_LINKS
 #define __DANCING_LINKS
 
+#include <stdint.h>
+
 // If __USE_HEURISTIC is set an heristic will be used to select which column to
 // explore first. Otherwise it will use the leftmost uncovered column. The
 // heuristic consists of exploring first the node that lead to the fewest
@@ -41,8 +43,8 @@ typedef struct __ans {
     struct __links *O;
 } _ans;
 
-extern unsigned long branchs;
-extern unsigned long solutions_found;
+uint64_t branchs;
+uint64_t solutions_found;
 
 // Initializes and empty structure
 _links *init_torus();

@@ -15,14 +15,15 @@
  *
  */
 
+#include <stdint.h>
 #include <stdio.h>
 #include <stdlib.h>
 
 #include "config.h"
 #include "links.h"
 
-unsigned long int branchs;
-unsigned long int solutions_found;
+uint64_t branchs;
+uint64_t solutions_found;
 
 void cover(_links *c) {
     _links *i, *j;
