@@ -67,8 +67,6 @@ int main(int argc, char **argv) {
     int **  set;
     int     x = 0;
     int     y = 0;
-    int     i = 0;
-    int     j = 0;
     int     n = 0;
 
     branchs         = 0;
@@ -82,13 +80,13 @@ int main(int argc, char **argv) {
 
     m = init_torus();
 
-    for (i = 0; i < y; i++) {
+    for (int i = 0; i < y; i++) {
         insert_col_header(m);
         set[i] = (int *)malloc(sizeof(int) * x);
     }
 
-    for (i = 0; i < x; i++) {
-        for (j = 0; j < y; j++) {
+    for (int i = 0; i < x; i++) {
+        for (int j = 0; j < y; j++) {
             // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
             fscanf(stdin, "%d", &set[j][i]);
         }
