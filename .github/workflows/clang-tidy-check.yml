@@ -1,0 +1,21 @@
+name: clang-tidy Check
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - name: Install deps
+        run: sudo apt-get update && \
+             sudo apt-get -y -qq install curl && \
+             sudo apt-get -y -qq install clang-tidy cmake jq clang cppcheck
+
+      - name: run clang-tidy
+        run: clang-tidy src/**/*.{c,h} --warnings-as-errors --checks=bugprone-*,performance-*,readability-*,portability-*,modernize-*,clang-analyzer-cplusplus-*,clang-analyzer-*,cppcoreguidelines-*
