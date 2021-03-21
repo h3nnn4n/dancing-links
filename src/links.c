@@ -80,8 +80,8 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
         _ans *  ans_tmp;
         _links *p;
         for (ans_tmp = ans->next; ans_tmp->next != NULL; ans_tmp = ans_tmp->next) {
-            for (p = ans_tmp->O, w = 0; (p != ans_tmp->O || w == 0) && p->C->n > n; p = p->R, w++)
-                ;
+            for (p = ans_tmp->O, w = 0; (p != ans_tmp->O || w == 0) && p->C->n > n; p = p->R, w++) {
+            }
             c = p;
             for (w = 0; p != c || w == 0; p = p->R, w++) {
                 printf("%2.d ", p->C->n > n ? p->C->n - n : p->C->n);
@@ -90,8 +90,8 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
         }
 
         if (ans_tmp->next == NULL) {
-            for (p = ans_tmp->O, w = 0; (p != ans_tmp->O || w == 0) && p->C->n > n; p = p->R, w++)
-                ;
+            for (p = ans_tmp->O, w = 0; (p != ans_tmp->O || w == 0) && p->C->n > n; p = p->R, w++) {
+            }
             c = p;
             for (w = 0; p != c || w == 0; p = p->R, w++) {
                 printf("%2.d ", p->C->n > n ? p->C->n - n : p->C->n);
@@ -183,8 +183,8 @@ void build_links_for_dancing(_links *h, int **m, int x, int y) {
     for (j = 0; j < x; j++) {
         for (i = 0, a = h->R, first = NULL; i < y; i++, a = a->R) {
             if (m[i][j] == 1) {
-                for (t = a->D; t != a; t = t->D)
-                    ;
+                for (t = a->D; t != a; t = t->D) {
+                }
 
                 _links *new = (_links *)malloc(sizeof(_links));
 
