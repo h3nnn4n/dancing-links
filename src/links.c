@@ -59,10 +59,10 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
         printf("Found %lu solutions\n", solutions_found);
 
         int     w;
-        _ans *  s;
+        _ans *  ans_tmp;
         _links *p;
-        for (s = ans->next; s->next != NULL; s = s->next) {
-            for (p = s->O, w = 0; (p != s->O || w == 0) && p->C->n > n; p = p->R, w++)
+        for (ans_tmp = ans->next; ans_tmp->next != NULL; ans_tmp = ans_tmp->next) {
+            for (p = ans_tmp->O, w = 0; (p != ans_tmp->O || w == 0) && p->C->n > n; p = p->R, w++)
                 ;
             c = p;
             for (w = 0; p != c || w == 0; p = p->R, w++) {
@@ -71,8 +71,8 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
             puts("");
         }
 
-        if (s->next == NULL) {
-            for (p = s->O, w = 0; (p != s->O || w == 0) && p->C->n > n; p = p->R, w++)
+        if (ans_tmp->next == NULL) {
+            for (p = ans_tmp->O, w = 0; (p != ans_tmp->O || w == 0) && p->C->n > n; p = p->R, w++)
                 ;
             c = p;
             for (w = 0; p != c || w == 0; p = p->R, w++) {
