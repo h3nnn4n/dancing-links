@@ -19,5 +19,11 @@ jobs:
       - name: Build
         run: make
 
-      - name: Run simple problem
-        run: ./dlx < samples/5x5_5_pentoI.dat
+      - name: Run simple problem, default args
+        run: ./dlx --multiple-solutions < samples/5x5_5_pentoI.dat
+
+      - name: Run simple problem with, find all solutions
+        run: ./dlx --multiple-solutions < samples/5x5_5_pentoI.dat
+
+      - name: Run complex problem, single solution
+        run: ./dlx --single-solution < samples/5x8_2xAll_freePieces.dat
