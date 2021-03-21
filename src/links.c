@@ -131,7 +131,7 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
     uncover(c); // Line 12
 
     aux = ans;
-    while (aux->next->next != NULL && aux->next != NULL) {
+    while (aux->next != NULL && aux->next->next != NULL) {
         aux = aux->next;
     }
 
