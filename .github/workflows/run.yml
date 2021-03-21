@@ -20,10 +20,10 @@ jobs:
         run: make
 
       - name: Run simple problem, default args
-        run: ./dancing_links --multiple-solutions < samples/5x5_5_pentoI.dat
+        run: ./dancing-links --multiple-solutions < samples/5x5_5_pentoI.dat
 
       - name: Run simple problem with, find all solutions
-        run: ./dancing_links --multiple-solutions < samples/5x5_5_pentoI.dat
+        run: ./dancing-links --multiple-solutions < samples/5x5_5_pentoI.dat
 
       - name: Run complex problem, single solution
-        run: ./dancing_links --single-solution < samples/5x8_2xAll_freePieces.dat
+        run: ./dancing-links --single-solution < samples/5x8_2xAll_freePieces.dat
