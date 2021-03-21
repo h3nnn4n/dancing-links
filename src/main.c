@@ -69,9 +69,6 @@ int main(int argc, char **argv){
     int **set;
     int x, y, i, j, n;
 
-    extern unsigned long int branchs;
-    extern unsigned long int solutions_found;
-
     branchs = 0;
     solutions_found = 0;
 

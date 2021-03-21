@@ -24,6 +24,9 @@ typedef struct __ans {
     struct __links *O;
 } _ans;
 
+extern unsigned long branchs;
+extern unsigned long solutions_found;
+
 // Initializes and empty structure
 _links *init_torus();
 
