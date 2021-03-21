@@ -1,0 +1,23 @@
+name: Run Solver on sample problems
+
+on: push
+
+jobs:
+  run-benchmarks:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [ubuntu-20.04, macos-10.15]
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - name: Build
+        run: make
+
+      - name: Run simple problem
+        run: ./dlx < samples/5x5_5_pentoI.dat
