@@ -13,9 +13,7 @@ jobs:
           submodules: true
 
       - name: Install deps
-        run: |
-          sudo apt-get update
-          sudo apt-get -y -qq install clang cpplint
+        run: python3 -m pip install cpplint
 
       - name: Update compile database
         run: |
