@@ -63,7 +63,6 @@ int main(int argc, char **argv) {
     }
 
     _links *m;
-    int **  set;
     int     x = 0;
     int     y = 0;
     int     n = 0;
@@ -75,7 +74,7 @@ int main(int argc, char **argv) {
     fscanf(stdin, "%d", &x);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
     fscanf(stdin, "%d", &n);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
 
-    set = (int **)malloc(sizeof(int *) * y);
+    int **set = (int **)malloc(sizeof(int *) * y);
 
     m = init_torus();
 
