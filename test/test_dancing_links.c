@@ -30,23 +30,15 @@ void test_single_solution_solve() {
     set[i] = (int *)malloc(sizeof(int) * x);
   }
 
-  TEST_MESSAGE("loadstart");
-
   for (i = 0; i < x; i++) {
     for (j = 0; j < y; j++) {
       fscanf(f, "%d", &set[j][i]);
     }
   }
 
-  TEST_MESSAGE("load completed");
-
   fclose(f);
 
-  TEST_MESSAGE("build_links_for_dancing");
-
   build_links_for_dancing(m, set, x, y);
-
-  TEST_MESSAGE("dancing_links");
 
   _ans *O = (_ans *)malloc(sizeof(_ans));
   dancing_links(m, 0, O, n);
@@ -79,23 +71,15 @@ void test_multiple_solutions_solve() {
     set[i] = (int *)malloc(sizeof(int) * x);
   }
 
-  TEST_MESSAGE("loadstart");
-
   for (i = 0; i < x; i++) {
     for (j = 0; j < y; j++) {
       fscanf(f, "%d", &set[j][i]);
     }
   }
 
-  TEST_MESSAGE("load completed");
-
   fclose(f);
 
-  TEST_MESSAGE("build_links_for_dancing");
-
   build_links_for_dancing(m, set, x, y);
-
-  TEST_MESSAGE("dancing_links");
 
   _ans *O = (_ans *)malloc(sizeof(_ans));
   dancing_links(m, 0, O, n);
