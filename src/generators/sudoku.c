@@ -28,7 +28,7 @@ void sudoku_generator() {
     // This is a placeholder string that we add when creating the file because
     // it is easier to replace at the beggining of a file than to add.
     // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
-    sprintf(buffer, "xxxxxxxxxxxxxxxxxxxx\n");
+    snprintf(buffer, sizeof(buffer), "xxxxxxxxxxxxxxxxxxxx\n");
     fwrite(buffer, strlen(buffer), 1, f);
 
     uint16_t clues[4][3] = {0};
@@ -93,7 +93,7 @@ void sudoku_generator() {
 
     rewind(f);
     // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
-    sprintf(buffer, "%d %d %d", n_columns, n_rows, n_n);
+    snprintf(buffer, sizeof(buffer), "%d %d %d", n_columns, n_rows, n_n);
     size_t buf_len = strlen(buffer);
 
     for (uint16_t i = 0; i <= 20 - buf_len; i++) {
