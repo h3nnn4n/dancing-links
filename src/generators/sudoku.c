@@ -87,10 +87,43 @@ void sudoku_generator() {
             }
         }
 
+        fprintf(f, "  ");
+
+        // Block Constraint
+        // Each block has to have exactly one of each number
+        uint16_t block_coordinate = global_to_in_block_position(row, column, value, grid_size, n_grids);
+        for (int block_i = 0; block_i < grid_size * n_grids; block_i++) {
+            for (int value_i = 0; value_i < grid_size * n_grids; value_i++) {
+                if (block_coordinate == block_i * (grid_size * n_grids) + value_i) {
+                    fprintf(f, "1 ");
+                } else {
+                    fprintf(f, "0 ");
+                }
+            }
+        }
+
         fprintf(f, "\n");
     }
 
     printf("\n");
 
     fclose(f);
+}
+
+uint16_t global_to_in_block_position(uint16_t row, uint16_t column, uint16_t value, uint16_t grid_size,
+                                     uint16_t n_grids) {
+    // Figure out which block we are dealing with
+    uint16_t block_row    = row / grid_size;
+    uint16_t block_col    = column / grid_size;
+    uint16_t block_number = block_col * n_grids + block_row;
+
+    // Figure out where in the block we are
+    // uint16_t in_block_row      = row % grid_size;
+    // uint16_t in_block_col      = column % grid_size;
+    // uint16_t in_block_position = in_block_col * (grid_size) + in_block_row;
+
+    // Build a global coordinate that combines the block number with the value inside
+    // Note that row and column are 0 indexed, value is not
+    uint16_t block_coordinate = block_number * (grid_size * grid_size) + value - 1;
+    return block_coordinate;
 }
