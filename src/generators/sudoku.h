@@ -39,5 +39,6 @@ void       sudoku_generator(char *input);
 void       build_cover_set(FILE *f, uint16_t row, uint16_t column, uint16_t value);
 uint16_t   global_to_in_block_position(uint16_t row, uint16_t column, uint16_t value);
 uint16_t **load_and_parse_sudoku(char *input, uint16_t *n_clues);
+void       unload_clues(uint16_t **clues, uint16_t n_clues);
 
 #endif /* end of include guard */

@@ -94,7 +94,7 @@ void sudoku_generator(char *sudoku_input) {
 
     fwrite(buffer, strlen(buffer), 1, f);
 
-    // TODO(h3nnn4n): Free memory allocated for clues
+    unload_clues(clues, n_clues);
 
     fclose(f);
 }
@@ -206,17 +206,22 @@ uint16_t global_to_in_block_position(uint16_t row, uint16_t column, uint16_t val
 }
 
 uint16_t **load_and_parse_sudoku(char *input, uint16_t *n_clues) {
-    char *   data       = NULL;
-    size_t   data_len   = 0;
-    uint16_t clue_count = 0;
+    uint16_t loaded_from_file = 0;
+    char *   data             = NULL;
+    size_t   data_len         = 0;
+    uint16_t clue_count       = 0;
 
-    // A sudoku wont ever have more than 81 clues
-    uint16_t **clues = (uint16_t **)malloc(sizeof(uint16_t *) * 81);
+    // A sudoku wont ever have more than N_CELLS clues
+    uint16_t **clues = (uint16_t **)malloc(sizeof(uint16_t *) * N_CELLS);
+
+    // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    memset(clues, 0, N_CELLS);
 
     if (file_exists(input)) {
         FILE *f = fopen(input, "rt");
         readall(f, &data, &data_len);
         fclose(f);
+        loaded_from_file = 1;
     } else {
         data     = input;
         data_len = strlen(data);
@@ -250,5 +255,21 @@ uint16_t **load_and_parse_sudoku(char *input, uint16_t *n_clues) {
 
     /*printf("finished parsing\n");*/
 
+    if (loaded_from_file) {
+        free(data);
+    }
+
     return clues;
+}
+
+void unload_clues(uint16_t **clues, uint16_t n_clues) {
+    for (int i = 0; i < N_CELLS; i++) {
+        if (clues[i] == NULL) {
+            continue;
+        }
+
+        free(clues[i]);
+    }
+
+    free(clues);
 }
