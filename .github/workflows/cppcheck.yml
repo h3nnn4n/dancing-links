@@ -24,5 +24,8 @@ jobs:
           make clean
           intercept-build make
 
+      - name: run cppcheck debug
+        run: cppcheck --enable=all --std=c11 --language=c --error-exitcode=1  src/*.c --check-config
+
       - name: run cppcheck
         run: cppcheck --enable=all --std=c11 --language=c --error-exitcode=1  src/*.c
