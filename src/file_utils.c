@@ -40,8 +40,10 @@ int file_exists(char *filepath) {
      and automatically appended after the data.
    Initial values of (*dataptr) and (*sizeptr) are ignored.
 */
+// cppcheck-suppress bufferAccessOutOfBounds
 int readall(FILE *in, char **dataptr, size_t *sizeptr) {
-    char * data = NULL, *temp;
+    char * data = NULL;
+    char * temp = NULL;
     size_t size = 0;
     size_t used = 0;
 
@@ -72,6 +74,7 @@ int readall(FILE *in, char **dataptr, size_t *sizeptr) {
             data = temp;
         }
 
+        assert(data != NULL);
         size_t n = fread(data + used, 1, READALL_CHUNK, in);
         if (n == 0)
             break;
