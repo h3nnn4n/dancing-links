@@ -18,7 +18,7 @@ repos:
     hooks:
     -   id: clang-tidy
         args:
-        - -checks=clang-diagnostic-return-type
+        - src/*.c --warnings-as-errors --checks=bugprone-*,performance-*,readability-*,portability-*,modernize-*,clang-analyzer-cplusplus-*,clang-analyzer-*,cppcoreguidelines-*
 
 repos:
 -   repo: https://github.com/bmorcos/pre-commit-hooks-cpp
