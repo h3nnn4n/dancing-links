@@ -216,9 +216,7 @@ void build_links_for_dancing(_links *h, int **m, int x, int y) {
 }
 
 void insert_col_header(_links *h) {
-    _links *new  = (_links *)malloc(sizeof(_links));
-    static int c = 0;
-    printf("%3d %p - alloc\n", c++, new);
+    _links *new = (_links *)malloc(sizeof(_links));
     _links *a;
 
     a         = h->L;
@@ -251,8 +249,7 @@ void free_ans(_ans *O) {
 }
 
 void free_links(_links *h) {
-    _links *   a  = h->R;
-    static int cc = 0;
+    _links *a = h->R;
 
     while (a != h) {
         _links *d = a->D;
@@ -263,7 +260,6 @@ void free_links(_links *h) {
         }
 
         _links *b = a->R;
-        printf("%3d %p - free\n", cc++, a);
         free(a);
         a = b;
     }
