@@ -21,6 +21,7 @@
 
 #include "config.h"
 #include "dlx_solver.h"
+#include "generators/sudoku.h"
 #include "links.h"
 
 struct option long_options[] = {{"quiet", no_argument, &quiet, 1},
@@ -56,7 +57,10 @@ int main(int argc, char **argv) {
                 // TODO(h3nnn4n): Read from file
                 break;
 
+            case 's': sudoku_generator(); return EXIT_SUCCESS;
+
             case '?':
+                return EXIT_FAILURE;
                 /* getopt_long already printed an error message. */
                 break;
 
