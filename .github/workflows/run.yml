@@ -18,6 +18,8 @@ jobs:
 
       - name: Build
         run: make
+        env:
+          CFLAGS: -DGRID_SIZE=2 -DN_GRIDS=2
 
       - name: Run simple problem, default args
         run: ./dancing-links --multiple-solutions < samples/5x5_5_pentoI.dat
@@ -27,3 +29,8 @@ jobs:
 
       - name: Run complex problem, single solution
         run: ./dancing-links --single-solution < samples/5x8_2xAll_freePieces.dat
+
+      - name: Run sudoku gen and solve
+        run: |
+          ./dancing-links --sudoku-gen samples/sudoku/sudoku_2.in
+          ./dancing-links --single-solution < sudoku_test.dat
