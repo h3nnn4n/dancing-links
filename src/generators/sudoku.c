@@ -1,14 +1,26 @@
 #include <stdint.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "generators/sudoku.h"
 
 void sudoku_generator() {
     FILE *f = fopen("sudoku_test.dat", "wt");
 
+    char buffer[256];
+    // This is a placeholder string that we add when creating the file because
+    // it is easier to replace at the beggining of a file than to add.
+    // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    sprintf(buffer, "xxxxxxxxxxxxxxxxxxxx\n");
+    fwrite(buffer, strlen(buffer), 1, f);
+
     uint16_t clues[4][3] = {0};
     uint16_t grid_size   = 2;
     uint16_t n_grids     = 2;
+
+    uint16_t n_columns = (grid_size * grid_size * n_grids * n_grids) * 4;
+    uint16_t n_rows    = 0;
+    uint16_t n_n       = grid_size * grid_size * n_grids * n_grids;
 
     clues[0][0] = 0;
     clues[0][1] = 1;
@@ -32,6 +44,7 @@ void sudoku_generator() {
         uint16_t value  = clues[i][2];
 
         build_cover_set(f, row, column, value, grid_size, n_grids);
+        n_rows += 1;
     }
 
     for (int value_i = 0; value_i < grid_size * grid_size; value_i++) {
@@ -54,11 +67,24 @@ void sudoku_generator() {
                     continue;
 
                 build_cover_set(f, row_i, column_i, value_i, grid_size, n_grids);
+                n_rows += 1;
             }
         }
     }
 
     printf("\n");
+
+    rewind(f);
+    // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    sprintf(buffer, "%d %d %d", n_columns, n_rows, n_n);
+    size_t buf_len = strlen(buffer);
+
+    for (uint16_t i = 0; i <= 20 - buf_len; i++) {
+        buffer[i + buf_len] = ' ';
+    }
+    buffer[20] = '\0';
+
+    fwrite(buffer, strlen(buffer), 1, f);
 
     fclose(f);
 }
