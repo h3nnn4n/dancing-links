@@ -21,6 +21,7 @@
 
 #include "config.h"
 #include "links.h"
+#include "solution_store.h"
 
 uint64_t branchs;
 uint64_t solutions_found;
@@ -76,6 +77,8 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
         printf("Solved. Took %lu steps\n", branchs);  // Line 1
         printf("Found %lu solutions\n", solutions_found);
 
+        store_begin();
+
         int     w;
         _ans *  ans_tmp;
         _links *p;
@@ -85,8 +88,10 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
             c = p;
             for (w = 0; p != c || w == 0; p = p->R, w++) {
                 printf("%2.d ", p->C->n > n ? p->C->n - n : p->C->n);
+                store_add_cell(p->C->n);
             }
             puts("");
+            store_begin_new_row();
         }
 
         if (ans_tmp->next == NULL) {
@@ -95,9 +100,13 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
             c = p;
             for (w = 0; p != c || w == 0; p = p->R, w++) {
                 printf("%2.d ", p->C->n > n ? p->C->n - n : p->C->n);
+                store_add_cell(p->C->n);
             }
             puts("");
+            store_begin_new_row();
         }
+
+        store_end();
 
         puts("--------------------");
 
