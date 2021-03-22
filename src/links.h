@@ -65,4 +65,8 @@ void cover(_links *c);
 // Uncovers a column. This process is described on Knuth's paper page 6.
 void uncover(_links *c);
 
+void free_set(int **set, int y);
+void free_ans(_ans *O);
+void free_links(_links *h);
+
 #endif

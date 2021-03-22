@@ -233,3 +233,36 @@ void insert_col_header(_links *h) {
 
     return;
 }
+
+void free_set(int **set, int y) {
+    for (int j = 0; j < y; ++j)
+        free(set[j]);
+    free(set);
+}
+
+void free_ans(_ans *O) {
+    while (O != NULL) {
+        _ans *o = O->next;
+        free(O);
+        O = o;
+    }
+}
+
+void free_links(_links *h) {
+    _links *a = h->R;
+
+    while (a != h) {
+        _links *d = a->D;
+        while (d != a) {
+            _links *c = d->D;
+            free(d);
+            d = c;
+        }
+
+        _links *b = a->R;
+        free(a);
+        a = b;
+    }
+
+    free(h);
+}
