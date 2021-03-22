@@ -19,6 +19,7 @@
 #include <stdlib.h>
 
 #include "config.h"
+#include "dlx_solver.h"
 #include "links.h"
 
 void dlx_solver() {
