@@ -19,10 +19,25 @@
 #define __GENERATORS_SUDOKU
 
 #include <stdint.h>
+#include <stdio.h>
 
-void     sudoku_generator();
-void     build_cover_set(FILE *f, uint16_t row, uint16_t column, uint16_t value, uint16_t grid_size, uint16_t n_grids);
-uint16_t global_to_in_block_position(uint16_t row, uint16_t column, uint16_t value, uint16_t grid_size,
-                                     uint16_t n_grids);
+// TODO(h3nnn4n) These shouldnt be hardcoded. They could be either infered from
+// the input size, or taken from the cli. People usually only care about the
+// 9x9 sudoku, so we should be fine for a while. As a stop-gap solution we are
+// setting it at compile time.
+#if !defined(GRID_SIZE)
+#define GRID_SIZE 3
+#define N_GRIDS   3
+#endif
+
+#define ROW_LENGTH    GRID_SIZE *N_GRIDS
+#define COLUMN_LENGTH GRID_SIZE *N_GRIDS
+#define N_CELLS       (GRID_SIZE * GRID_SIZE * N_GRIDS * N_GRIDS)
+#define MAX_VALUE     (GRID_SIZE * GRID_SIZE)
+
+void       sudoku_generator(char *input);
+void       build_cover_set(FILE *f, uint16_t row, uint16_t column, uint16_t value);
+uint16_t   global_to_in_block_position(uint16_t row, uint16_t column, uint16_t value);
+uint16_t **load_and_parse_sudoku(char *input, uint16_t *n_clues);
 
 #endif /* end of include guard */

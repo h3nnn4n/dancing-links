@@ -18,6 +18,7 @@
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "config.h"
 #include "dlx_solver.h"
@@ -57,8 +58,15 @@ int main(int argc, char **argv) {
                 // TODO(h3nnn4n): Read from file
                 break;
 
-            case 's': sudoku_generator(); return EXIT_SUCCESS;
+            case 's': {
+                char *sudoku_input = malloc(sizeof(char) * (strlen(optarg) + 2));
+                memcpy(sudoku_input, optarg, sizeof(char) * (strlen(optarg) + 1));
 
+                sudoku_generator(sudoku_input);
+
+                free(sudoku_input);
+            }
+                return EXIT_SUCCESS;
             case '?':
                 return EXIT_FAILURE;
                 /* getopt_long already printed an error message. */
