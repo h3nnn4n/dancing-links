@@ -21,7 +21,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "file_utils.h"
+#include "../file_utils.h"
 #include "generators/sudoku.h"
 
 void sudoku_generator(char *sudoku_input) {
