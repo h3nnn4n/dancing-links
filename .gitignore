@@ -40,3 +40,6 @@ build
 
 # Cache files
 .cache # used by clang
+
+# perf files
+gmon.out
