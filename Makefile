@@ -27,7 +27,8 @@ endif
 
 CC = gcc
 
-C_FILES := $(wildcard src/*.c)
+C_FILES := $(wildcard src/*.c) \
+           $(wildcard src/**/*.c)
 C_FILES_TEST := $(wildcard test/*.c)
 C_FILES_TEST_DEPS := $(wildcard deps/Unity/src/*.c)
 
