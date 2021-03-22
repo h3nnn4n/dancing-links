@@ -40,7 +40,7 @@ int file_exists(char *filepath) {
      and automatically appended after the data.
    Initial values of (*dataptr) and (*sizeptr) are ignored.
 */
-// cppcheck-suppress bufferAccessOutOfBounds
+// cppcheck-suppress unusedFunction
 int readall(FILE *in, char **dataptr, size_t *sizeptr) {
     char * data = NULL;
     char * temp = NULL;
