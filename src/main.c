@@ -20,12 +20,14 @@
 #include <stdlib.h>
 
 #include "config.h"
+#include "dlx_solver.h"
 #include "links.h"
 
 struct option long_options[] = {{"quiet", no_argument, &quiet, 1},
                                 {"single-solution", no_argument, &single_solution, 1},
                                 {"multiple-solutions", no_argument, &single_solution, 0},
                                 {"file", required_argument, 0, 'f'},
+                                {"sudoku-gen", required_argument, 0, 's'},
                                 {0, 0, 0, 0}};
 
 int main(int argc, char **argv) {
@@ -62,57 +64,7 @@ int main(int argc, char **argv) {
         }
     }
 
-    _links *m;
-    int     x = 0;
-    int     y = 0;
-    int     n = 0;
-
-    branchs         = 0;
-    solutions_found = 0;
-
-    fscanf(stdin, "%d", &y);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
-    fscanf(stdin, "%d", &x);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
-    fscanf(stdin, "%d", &n);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
-
-    int **set = (int **)malloc(sizeof(int *) * y);
-
-    m = init_torus();
-
-    for (int i = 0; i < y; i++) {
-        insert_col_header(m);
-        set[i] = (int *)malloc(sizeof(int) * x);
-    }
-
-    for (int i = 0; i < x; i++) {
-        for (int j = 0; j < y; j++) {
-            // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
-            fscanf(stdin, "%d", &set[j][i]);
-        }
-    }
-
-    if (!quiet) {
-        puts("--------------------");
-        printf("Building in-memory model\n");
-    }
-
-    build_links_for_dancing(m, set, x, y);
-
-    if (!quiet) {
-        puts("--------------------");
-        printf("Starting solve process\n");
-        puts("--------------------");
-    }
-
-    _ans *O = (_ans *)malloc(sizeof(_ans));
-    dancing_links(m, 0, O, n);
-
-    if (!quiet) {
-        puts("--------------------");
-    }
-
-    free_set(set, y);
-    free_ans(O);
-    free_links(m);
+    dlx_solver();
 
     return EXIT_SUCCESS;
 }
