@@ -21,7 +21,7 @@ jobs:
         run: make gperftools
 
       - name: Detect Leaks on single solution
-        run: ./dancing-links --single-solution --quited < samples/5x8_2xAll_freePieces.dat
+        run: ./dancing-links --single-solution --quiet < samples/5x8_2xAll_freePieces.dat
         env:
           HEAPCHECK: normal
 
