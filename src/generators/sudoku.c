@@ -60,8 +60,8 @@ void sudoku_generator() {
         // Note that row and column are 0 indexed, value is not
         uint16_t row_coordinate = row * (grid_size * n_grids) + value - 1;
         for (int row_i = 0; row_i < grid_size * n_grids; row_i++) {
-            for (int col_i = 0; col_i < grid_size * n_grids; col_i++) {
-                if (row_coordinate == col_i * (grid_size * n_grids) + row_i) {
+            for (int value_i = 0; value_i < grid_size * n_grids; value_i++) {
+                if (row_coordinate == row_i * (grid_size * n_grids) + value_i) {
                     fprintf(f, "1 ");
                 } else {
                     fprintf(f, "0 ");
@@ -77,9 +77,9 @@ void sudoku_generator() {
         // Build an index where the column and the value are the coordinates
         // Note that row and column are 0 indexed, value is not
         uint16_t col_coordinate = column * (grid_size * n_grids) + value - 1;
-        for (int row_i = 0; row_i < grid_size * n_grids; row_i++) {
-            for (int col_i = 0; col_i < grid_size * n_grids; col_i++) {
-                if (col_coordinate == col_i * (grid_size * n_grids) + row_i) {
+        for (int col_i = 0; col_i < grid_size * n_grids; col_i++) {
+            for (int value_i = 0; value_i < grid_size * n_grids; value_i++) {
+                if (col_coordinate == col_i * (grid_size * n_grids) + value_i) {
                     fprintf(f, "1 ");
                 } else {
                     fprintf(f, "0 ");
