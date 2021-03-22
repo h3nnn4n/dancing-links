@@ -54,7 +54,7 @@ int mkdir_p(const char *path) {
         return -1;
     }
 
-    strcpy(_path, path);
+    snprintf(_path, sizeof(_path), "%s", path);
 
     for (p = _path + 1; *p; p++) {
         if (*p == '/') {
@@ -101,7 +101,6 @@ int readall(FILE *in, char **dataptr, size_t *sizeptr) {
         return READALL_ERROR;
 
     while (1) {
-
         if (used + READALL_CHUNK + 1 > size) {
             size = used + READALL_CHUNK + 1;
 
