@@ -19,6 +19,8 @@ jobs:
 
       - name: Build
         run: make gperftools
+        env:
+          CFLAGS: -DGRID_SIZE=2 -DN_GRIDS=2
 
       - name: Detect Leaks on single solution
         run: ./dancing-links --single-solution --quiet < samples/5x8_2xAll_freePieces.dat
@@ -27,5 +29,15 @@ jobs:
 
       - name: Detect Leaks on multiple solutions
         run: ./dancing-links --multiple-solutions --quiet < samples/5x5_5_pentoI.dat
+        env:
+          HEAPCHECK: normal
+
+      - name: Detect Leaks on generate coverset from file
+        run: ./dancing-links --sudoku-gen samples/sudoku/sudoku_2.in
+        env:
+          HEAPCHECK: normal
+
+      - name: Detect Leaks on generate coverset from str
+        run: ./dancing-links --sudoku-gen 0100002030000004
         env:
           HEAPCHECK: normal
