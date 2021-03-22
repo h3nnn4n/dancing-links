@@ -11,11 +11,47 @@
             "-Isrc",
             "-Ideps/Unity/src",
             "-o",
-            "/home/h3nnn4n/progs/dancing-links/build/src/generators/sudoku.o",
-            "src/generators/sudoku.c"
+            "/home/h3nnn4n/progs/dancing-links/build/src/main.o",
+            "src/main.c"
         ],
         "directory": "/home/h3nnn4n/progs/dancing-links",
-        "file": "src/generators/sudoku.c"
+        "file": "src/main.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-pedantic",
+            "-std=c11",
+            "-O3",
+            "-Isrc",
+            "-Ideps/Unity/src",
+            "-o",
+            "/home/h3nnn4n/progs/dancing-links/build/src/config.o",
+            "src/config.c"
+        ],
+        "directory": "/home/h3nnn4n/progs/dancing-links",
+        "file": "src/config.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-Wall",
+            "-Wextra",
+            "-pedantic",
+            "-std=c11",
+            "-O3",
+            "-Isrc",
+            "-Ideps/Unity/src",
+            "-o",
+            "/home/h3nnn4n/progs/dancing-links/build/src/file_utils.o",
+            "src/file_utils.c"
+        ],
+        "directory": "/home/h3nnn4n/progs/dancing-links",
+        "file": "src/file_utils.c"
     },
     {
         "arguments": [
@@ -47,24 +83,6 @@
             "-Isrc",
             "-Ideps/Unity/src",
             "-o",
-            "/home/h3nnn4n/progs/dancing-links/build/src/main.o",
-            "src/main.c"
-        ],
-        "directory": "/home/h3nnn4n/progs/dancing-links",
-        "file": "src/main.c"
-    },
-    {
-        "arguments": [
-            "cc",
-            "-c",
-            "-Wall",
-            "-Wextra",
-            "-pedantic",
-            "-std=c11",
-            "-O3",
-            "-Isrc",
-            "-Ideps/Unity/src",
-            "-o",
             "/home/h3nnn4n/progs/dancing-links/build/src/links.o",
             "src/links.c"
         ],
@@ -83,10 +101,10 @@
             "-Isrc",
             "-Ideps/Unity/src",
             "-o",
-            "/home/h3nnn4n/progs/dancing-links/build/src/config.o",
-            "src/config.c"
+            "/home/h3nnn4n/progs/dancing-links/build/src/generators/sudoku.o",
+            "src/generators/sudoku.c"
         ],
         "directory": "/home/h3nnn4n/progs/dancing-links",
-        "file": "src/config.c"
+        "file": "src/generators/sudoku.c"
     }
 ]
