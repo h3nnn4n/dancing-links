@@ -262,7 +262,7 @@ uint16_t **load_and_parse_sudoku(char *input, uint16_t *n_clues) {
     return clues;
 }
 
-void unload_clues(uint16_t **clues, uint16_t n_clues) {
+void unload_clues(uint16_t **clues, __attribute__((unused)) uint16_t n_clues) {
     for (int i = 0; i < N_CELLS; i++) {
         if (clues[i] == NULL) {
             continue;
