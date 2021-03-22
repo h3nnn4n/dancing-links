@@ -15,6 +15,7 @@
  *
  */
 
+#include <assert.h>
 #include <getopt.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -59,7 +60,10 @@ int main(int argc, char **argv) {
                 break;
 
             case 's': {
-                char *sudoku_input = malloc(sizeof(char) * (strlen(optarg) + 2));
+                assert(optarg != NULL);
+                size_t arg_len      = strlen(optarg) + 2;
+                char * sudoku_input = malloc(sizeof(char) * arg_len);
+                // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
                 memcpy(sudoku_input, optarg, sizeof(char) * (strlen(optarg) + 1));
 
                 sudoku_generator(sudoku_input);
