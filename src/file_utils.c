@@ -31,17 +31,17 @@ int file_exists(char *filepath) {
     return (stat(filepath, &buffer) == 0);
 }
 
-// https://stackoverflow.com/a/44894946
-/* This function returns one of the READALL_ constants above.
-   If the return value is zero == READALL_OK, then:
-     (*dataptr) points to a dynamically allocated buffer, with
-     (*sizeptr) chars read from the file.
-     The buffer is allocated for one extra char, which is NUL,
-     and automatically appended after the data.
-   Initial values of (*dataptr) and (*sizeptr) are ignored.
-*/
 // cppcheck-suppress unusedFunction
 int readall(FILE *in, char **dataptr, size_t *sizeptr) {
+    // https://stackoverflow.com/a/44894946
+    /* This function returns one of the READALL_ constants above.
+       If the return value is zero == READALL_OK, then:
+         (*dataptr) points to a dynamically allocated buffer, with
+         (*sizeptr) chars read from the file.
+         The buffer is allocated for one extra char, which is NUL,
+         and automatically appended after the data.
+       Initial values of (*dataptr) and (*sizeptr) are ignored.
+    */
     char * data = NULL;
     char * temp = NULL;
     size_t size = 0;
