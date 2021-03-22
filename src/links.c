@@ -143,7 +143,7 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
         }
 
         if (single_solution && first_solution_found)
-            return;
+            break;
     }
 
     uncover(c);  // Line 12
@@ -216,7 +216,9 @@ void build_links_for_dancing(_links *h, int **m, int x, int y) {
 }
 
 void insert_col_header(_links *h) {
-    _links *new = (_links *)malloc(sizeof(_links));
+    _links *new  = (_links *)malloc(sizeof(_links));
+    static int c = 0;
+    printf("%3d %p - alloc\n", c++, new);
     _links *a;
 
     a         = h->L;
@@ -232,4 +234,39 @@ void insert_col_header(_links *h) {
     new->name = NULL;
 
     return;
+}
+
+void free_set(int **set, int y) {
+    for (int j = 0; j < y; ++j)
+        free(set[j]);
+    free(set);
+}
+
+void free_ans(_ans *O) {
+    while (O != NULL) {
+        _ans *o = O->next;
+        free(O);
+        O = o;
+    }
+}
+
+void free_links(_links *h) {
+    _links *   a  = h->R;
+    static int cc = 0;
+
+    while (a != h) {
+        _links *d = a->D;
+        while (d != a) {
+            _links *c = d->D;
+            free(d);
+            d = c;
+        }
+
+        _links *b = a->R;
+        printf("%3d %p - free\n", cc++, a);
+        free(a);
+        a = b;
+    }
+
+    free(h);
 }

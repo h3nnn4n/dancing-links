@@ -110,5 +110,9 @@ int main(int argc, char **argv) {
         puts("--------------------");
     }
 
+    free_set(set, y);
+    free_ans(O);
+    free_links(m);
+
     return EXIT_SUCCESS;
 }
