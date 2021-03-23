@@ -3,6 +3,7 @@
         "arguments": [
             "cc",
             "-c",
+            "-D_POSIX_C_SOURCE=1",
             "-Wall",
             "-Wextra",
             "-pedantic",
@@ -21,96 +22,7 @@
         "arguments": [
             "cc",
             "-c",
-            "-Wall",
-            "-Wextra",
-            "-pedantic",
-            "-std=c11",
-            "-O3",
-            "-Isrc",
-            "-Ideps/Unity/src",
-            "-o",
-            "/home/h3nnn4n/progs/dancing-links/build/src/generators/sudoku.o",
-            "src/generators/sudoku.c"
-        ],
-        "directory": "/home/h3nnn4n/progs/dancing-links",
-        "file": "src/generators/sudoku.c"
-    },
-    {
-        "arguments": [
-            "cc",
-            "-c",
-            "-Wall",
-            "-Wextra",
-            "-pedantic",
-            "-std=c11",
-            "-O3",
-            "-Isrc",
-            "-Ideps/Unity/src",
-            "-o",
-            "/home/h3nnn4n/progs/dancing-links/build/src/file_utils.o",
-            "src/file_utils.c"
-        ],
-        "directory": "/home/h3nnn4n/progs/dancing-links",
-        "file": "src/file_utils.c"
-    },
-    {
-        "arguments": [
-            "cc",
-            "-c",
-            "-Wall",
-            "-Wextra",
-            "-pedantic",
-            "-std=c11",
-            "-O3",
-            "-Isrc",
-            "-Ideps/Unity/src",
-            "-o",
-            "/home/h3nnn4n/progs/dancing-links/build/src/dlx_solver.o",
-            "src/dlx_solver.c"
-        ],
-        "directory": "/home/h3nnn4n/progs/dancing-links",
-        "file": "src/dlx_solver.c"
-    },
-    {
-        "arguments": [
-            "cc",
-            "-c",
-            "-Wall",
-            "-Wextra",
-            "-pedantic",
-            "-std=c11",
-            "-O3",
-            "-Isrc",
-            "-Ideps/Unity/src",
-            "-o",
-            "/home/h3nnn4n/progs/dancing-links/build/src/links.o",
-            "src/links.c"
-        ],
-        "directory": "/home/h3nnn4n/progs/dancing-links",
-        "file": "src/links.c"
-    },
-    {
-        "arguments": [
-            "cc",
-            "-c",
-            "-Wall",
-            "-Wextra",
-            "-pedantic",
-            "-std=c11",
-            "-O3",
-            "-Isrc",
-            "-Ideps/Unity/src",
-            "-o",
-            "/home/h3nnn4n/progs/dancing-links/build/src/solution_store.o",
-            "src/solution_store.c"
-        ],
-        "directory": "/home/h3nnn4n/progs/dancing-links",
-        "file": "src/solution_store.c"
-    },
-    {
-        "arguments": [
-            "cc",
-            "-c",
+            "-D_POSIX_C_SOURCE=1",
             "-Wall",
             "-Wextra",
             "-pedantic",
@@ -129,6 +41,45 @@
         "arguments": [
             "cc",
             "-c",
+            "-D_POSIX_C_SOURCE=1",
+            "-Wall",
+            "-Wextra",
+            "-pedantic",
+            "-std=c11",
+            "-O3",
+            "-Isrc",
+            "-Ideps/Unity/src",
+            "-o",
+            "/home/h3nnn4n/progs/dancing-links/build/src/solution_store.o",
+            "src/solution_store.c"
+        ],
+        "directory": "/home/h3nnn4n/progs/dancing-links",
+        "file": "src/solution_store.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-D_POSIX_C_SOURCE=1",
+            "-Wall",
+            "-Wextra",
+            "-pedantic",
+            "-std=c11",
+            "-O3",
+            "-Isrc",
+            "-Ideps/Unity/src",
+            "-o",
+            "/home/h3nnn4n/progs/dancing-links/build/src/dlx_solver.o",
+            "src/dlx_solver.c"
+        ],
+        "directory": "/home/h3nnn4n/progs/dancing-links",
+        "file": "src/dlx_solver.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-D_POSIX_C_SOURCE=1",
             "-Wall",
             "-Wextra",
             "-pedantic",
@@ -142,5 +93,62 @@
         ],
         "directory": "/home/h3nnn4n/progs/dancing-links",
         "file": "src/config.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-D_POSIX_C_SOURCE=1",
+            "-Wall",
+            "-Wextra",
+            "-pedantic",
+            "-std=c11",
+            "-O3",
+            "-Isrc",
+            "-Ideps/Unity/src",
+            "-o",
+            "/home/h3nnn4n/progs/dancing-links/build/src/generators/sudoku.o",
+            "src/generators/sudoku.c"
+        ],
+        "directory": "/home/h3nnn4n/progs/dancing-links",
+        "file": "src/generators/sudoku.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-D_POSIX_C_SOURCE=1",
+            "-Wall",
+            "-Wextra",
+            "-pedantic",
+            "-std=c11",
+            "-O3",
+            "-Isrc",
+            "-Ideps/Unity/src",
+            "-o",
+            "/home/h3nnn4n/progs/dancing-links/build/src/file_utils.o",
+            "src/file_utils.c"
+        ],
+        "directory": "/home/h3nnn4n/progs/dancing-links",
+        "file": "src/file_utils.c"
+    },
+    {
+        "arguments": [
+            "cc",
+            "-c",
+            "-D_POSIX_C_SOURCE=1",
+            "-Wall",
+            "-Wextra",
+            "-pedantic",
+            "-std=c11",
+            "-O3",
+            "-Isrc",
+            "-Ideps/Unity/src",
+            "-o",
+            "/home/h3nnn4n/progs/dancing-links/build/src/links.o",
+            "src/links.c"
+        ],
+        "directory": "/home/h3nnn4n/progs/dancing-links",
+        "file": "src/links.c"
     }
 ]

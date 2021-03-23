@@ -29,6 +29,7 @@
 void sudoku_parse(char *input) {
     const char separator[2]     = " ";
     uint16_t   loaded_from_file = 0;
+    char *     token_data       = NULL;
     char *     data             = NULL;
     size_t     data_len         = 0;
 
@@ -42,7 +43,7 @@ void sudoku_parse(char *input) {
         data_len = strlen(data);
     }
 
-    char *token = strtok(data, separator);
+    char *token = strtok_r(data, separator, &token_data);
 
     while (token != NULL) {
         uint16_t values[4];
@@ -50,7 +51,7 @@ void sudoku_parse(char *input) {
         for (int i = 0; i < 4; i++) {
             do {
                 values[i] = atoi(token);
-                token     = strtok(NULL, separator);
+                token     = strtok_r(NULL, separator, &token_data);
             } while (token != NULL && values[i] == 0);
 
             if (token == NULL) {

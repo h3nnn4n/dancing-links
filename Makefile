@@ -13,7 +13,7 @@ INCLUDES = -Isrc \
 
 OPTIMIZATION=-O3
 
-override CFLAGS += -Wall -Wextra -pedantic -std=c11 $(OPTIMIZATION) $(OPTIONS) $(INCLUDES)
+override CFLAGS += -D_POSIX_C_SOURCE=1 -Wall -Wextra -pedantic -std=c11 $(OPTIMIZATION) $(OPTIONS) $(INCLUDES)
 
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
