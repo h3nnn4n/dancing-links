@@ -30,8 +30,8 @@
 #define N_GRIDS   3
 #endif
 
-#define ROW_LENGTH    GRID_SIZE *N_GRIDS
-#define COLUMN_LENGTH GRID_SIZE *N_GRIDS
+#define ROW_LENGTH    (GRID_SIZE * N_GRIDS)
+#define COLUMN_LENGTH (GRID_SIZE * N_GRIDS)
 #define N_CELLS       (GRID_SIZE * GRID_SIZE * N_GRIDS * N_GRIDS)
 #define MAX_VALUE     (GRID_SIZE * GRID_SIZE)
 

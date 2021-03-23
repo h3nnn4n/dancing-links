@@ -25,12 +25,14 @@
 #include "dlx_solver.h"
 #include "generators/sudoku.h"
 #include "links.h"
+#include "parsers/sudoku.h"
 
 struct option long_options[] = {{"quiet", no_argument, &quiet, 1},
                                 {"single-solution", no_argument, &single_solution, 1},
                                 {"multiple-solutions", no_argument, &single_solution, 0},
                                 {"file", required_argument, 0, 'f'},
                                 {"sudoku-gen", required_argument, 0, 's'},
+                                {"sudoku-parse", required_argument, 0, 't'},
                                 {0, 0, 0, 0}};
 
 int main(int argc, char **argv) {
@@ -67,6 +69,19 @@ int main(int argc, char **argv) {
                 memcpy(sudoku_input, optarg, sizeof(char) * (strlen(optarg) + 1));
 
                 sudoku_generator(sudoku_input);
+
+                free(sudoku_input);
+            }
+                return EXIT_SUCCESS;
+
+            case 't': {
+                assert(optarg != NULL);
+                size_t arg_len      = strlen(optarg) + 2;
+                char * sudoku_input = malloc(sizeof(char) * arg_len);
+                // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+                memcpy(sudoku_input, optarg, sizeof(char) * (strlen(optarg) + 1));
+
+                sudoku_parse(sudoku_input);
 
                 free(sudoku_input);
             }
