@@ -15,6 +15,8 @@
  *
  */
 
+#define _POSIX_C_SOURCE 1
+
 #include <assert.h>
 #include <ctype.h>
 #include <stdint.h>
