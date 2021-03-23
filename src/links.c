@@ -87,7 +87,7 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
             }
             c = p;
             for (w = 0; p != c || w == 0; p = p->R, w++) {
-                printf("%2.d ", p->C->n > n ? p->C->n - n : p->C->n);
+                printf("%2.d ", p->C->n % n);
                 store_add_cell(p->C->n);
             }
             puts("");
@@ -99,7 +99,7 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
             }
             c = p;
             for (w = 0; p != c || w == 0; p = p->R, w++) {
-                printf("%2.d ", p->C->n > n ? p->C->n - n : p->C->n);
+                printf("%2.d ", p->C->n % n);
                 store_add_cell(p->C->n);
             }
             puts("");
