@@ -1,6 +1,5 @@
 /*
- * Copyright nobody (just making the linter happy, since I dont know how to
- * disable it for this file only)
+ * No Copyright needed, it is public domain
  *
  * public domain strtok_r() by Charlie Gordon
  *
