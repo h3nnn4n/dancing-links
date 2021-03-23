@@ -35,6 +35,8 @@ void sudoku_parse(char *input) {
     char *     data             = NULL;
     size_t     data_len         = 0;
 
+    char sudoku_solution[ROW_LENGTH][COLUMN_LENGTH] = {0};
+
     if (file_exists(input)) {
         FILE *f = fopen(input, "rt");
         readall(f, &data, &data_len);
@@ -70,13 +72,27 @@ void sudoku_parse(char *input) {
         uint16_t column   = position / ROW_LENGTH;
         uint16_t value    = (values[1] - 1) % ROW_LENGTH + 1;
 
-        printf("%2d %2d %2d\n", row, column, value);
-
         assert(row < ROW_LENGTH);
         assert(column < COLUMN_LENGTH);
 
         assert(value > 0);
         assert(value <= MAX_VALUE);
+
+        sudoku_solution[row][column] = value;
+    }
+
+    for (int row = 0; row < ROW_LENGTH; row++) {
+        for (int col = 0; col < COLUMN_LENGTH; col++) {
+            printf("%d ", sudoku_solution[row][col]);
+            if ((col + 1) % GRID_SIZE == 0 && col > 0) {
+                printf(" ");
+            }
+        }
+        printf("\n");
+
+        if ((row + 1) % GRID_SIZE == 0 && row > 0) {
+            printf("\n");
+        }
     }
 
     if (loaded_from_file) {
