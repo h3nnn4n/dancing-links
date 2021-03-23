@@ -32,5 +32,5 @@ void store_begin_new_row() {
 
 void store_add_cell(int cell_value) {
     // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
-    fprintf(f, "%2d", cell_value);
+    fprintf(f, "%2d ", cell_value);
 }
