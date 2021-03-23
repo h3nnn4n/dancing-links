@@ -15,8 +15,6 @@
  *
  */
 
-#define _POSIX_C_SOURCE 1
-
 #include <assert.h>
 #include <ctype.h>
 #include <stdint.h>
@@ -27,6 +25,7 @@
 #include "file_utils.h"
 #include "generators/sudoku.h"
 #include "parsers/sudoku.h"
+#include "strtok.h"
 
 void sudoku_parse(char *input) {
     const char separator[2]     = " ";
