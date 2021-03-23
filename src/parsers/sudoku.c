@@ -94,7 +94,44 @@ void sudoku_parse(char *input) {
         }
     }
 
+    sudoku_check(sudoku_solution);
+
     if (loaded_from_file) {
         free(data);
+    }
+}
+
+void sudoku_check(char sudoku_solution[ROW_LENGTH][COLUMN_LENGTH]) {
+    int row_check[ROW_LENGTH][COLUMN_LENGTH] = {0};
+    int col_check[ROW_LENGTH][COLUMN_LENGTH] = {0};
+    int value_count_check[MAX_VALUE]         = {0};
+
+    for (int row = 0; row < ROW_LENGTH; row++) {
+        for (int col = 0; col < COLUMN_LENGTH; col++) {
+            int value = sudoku_solution[row][col];
+            value_count_check[value - 1] += 1;
+
+            if (row_check[row][value - 1] != 0) {
+                fprintf(stderr, "Sudoku row check failed on %d %d %d\n", row, col, value);
+                abort();
+            } else {
+                row_check[row][value - 1] = value;
+            }
+
+            if (col_check[col][value - 1] != 0) {
+                fprintf(stderr, "Sudoku column check failed on %d %d %d\n", row, col, value);
+                abort();
+            } else {
+                col_check[col][value - 1] = value;
+            }
+        }
+    }
+
+    // I think this might be redundant :thinking:
+    for (int value_i = 0; value_i < MAX_VALUE; value_i++) {
+        if (value_count_check[value_i] != MAX_VALUE) {
+            fprintf(stderr, "Sudoku value count check failed on %d\n", value_i + 1);
+            abort();
+        }
     }
 }

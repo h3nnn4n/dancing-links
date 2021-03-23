@@ -18,6 +18,9 @@
 #ifndef SRC_PARSERS_SUDOKU_H_
 #define SRC_PARSERS_SUDOKU_H_
 
+#include "generators/sudoku.h"
+
 void sudoku_parse(char *input);
+void sudoku_check(char sudoku_solution[ROW_LENGTH][COLUMN_LENGTH]);
 
 #endif /* SRC_PARSERS_SUDOKU_H_ */
