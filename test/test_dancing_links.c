@@ -35,9 +35,9 @@ void test_single_solution_solve() {
 
     FILE *f = fopen("./samples/5x5_5_pentoI.dat", "rt");
 
-    fscanf(f, "%d", &y);
-    fscanf(f, "%d", &x);
-    fscanf(f, "%d", &n);
+    fscanf(f, "%d", &y);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fscanf(f, "%d", &x);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fscanf(f, "%d", &n);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
 
     set = (int **)malloc(sizeof(int *) * y);
 
@@ -50,6 +50,7 @@ void test_single_solution_solve() {
 
     for (i = 0; i < x; i++) {
         for (j = 0; j < y; j++) {
+            // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
             fscanf(f, "%d", &set[j][i]);
         }
     }
@@ -59,6 +60,7 @@ void test_single_solution_solve() {
     build_links_for_dancing(m, set, x, y);
 
     _ans *O = (_ans *)malloc(sizeof(_ans));
+    // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
     memset(O, 0, sizeof(_ans));
     dancing_links(m, 0, O, n);
 
@@ -77,9 +79,9 @@ void test_multiple_solutions_solve() {
 
     FILE *f = fopen("./samples/5x5_5_pentoI.dat", "rt");
 
-    fscanf(f, "%d", &y);
-    fscanf(f, "%d", &x);
-    fscanf(f, "%d", &n);
+    fscanf(f, "%d", &y);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fscanf(f, "%d", &x);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fscanf(f, "%d", &n);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
 
     set = (int **)malloc(sizeof(int *) * y);
 
@@ -92,6 +94,7 @@ void test_multiple_solutions_solve() {
 
     for (i = 0; i < x; i++) {
         for (j = 0; j < y; j++) {
+            // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
             fscanf(f, "%d", &set[j][i]);
         }
     }
@@ -101,6 +104,7 @@ void test_multiple_solutions_solve() {
     build_links_for_dancing(m, set, x, y);
 
     _ans *O = (_ans *)malloc(sizeof(_ans));
+    // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
     memset(O, 0, sizeof(_ans));
     dancing_links(m, 0, O, n);
 
