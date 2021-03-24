@@ -18,7 +18,7 @@ override CFLAGS += -Wall -Wextra -pedantic -std=c11 $(OPTIMIZATION) $(OPTIONS) $
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
   ECHOFLAGS = -e
-  LDFLAGS = -Wl,-Ldeps/Unity/build/
+  UNAME_S = -Wl,-Ldeps/Unity/build/
 endif
 ifeq ($(UNAME_S),Darwin)
   CFLAGS += -Wno-unused-command-line-argument
@@ -27,7 +27,8 @@ endif
 
 CC = gcc
 
-C_FILES := $(wildcard src/*.c)
+C_FILES := $(wildcard src/*.c) \
+           $(wildcard src/**/*.c)
 C_FILES_TEST := $(wildcard test/*.c)
 C_FILES_TEST_DEPS := $(wildcard deps/Unity/src/*.c)
 

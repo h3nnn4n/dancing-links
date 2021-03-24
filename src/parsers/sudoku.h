@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015,2021  h3nnn4n, aka Renan S. Silva
+ * Copyright (C) 2021  h3nnn4n, aka Renan S. Silva
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,17 +15,12 @@
  *
  */
 
-#include <unity.h>
+#ifndef SRC_PARSERS_SUDOKU_H_
+#define SRC_PARSERS_SUDOKU_H_
 
-void test_test() { TEST_PASS(); }
+#include "generators/sudoku.h"
 
-void setUp() {}
-void tearDown() {}
+void sudoku_parse(char *input);
+void sudoku_check(char sudoku_solution[ROW_LENGTH][COLUMN_LENGTH]);
 
-int main() {
-    UNITY_BEGIN();
-
-    RUN_TEST(test_test);
-
-    return UNITY_END();
-}
+#endif /* SRC_PARSERS_SUDOKU_H_ */

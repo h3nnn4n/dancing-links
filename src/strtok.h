@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015,2021  h3nnn4n, aka Renan S. Silva
+ * Copyright (C) 2021  h3nnn4n, aka Renan S. Silva
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,17 +15,9 @@
  *
  */
 
-#include <unity.h>
+#ifndef SRC_STRTOK_H_
+#define SRC_STRTOK_H_
 
-void test_test() { TEST_PASS(); }
+char *strtok_r(char *, const char *, char **);
 
-void setUp() {}
-void tearDown() {}
-
-int main() {
-    UNITY_BEGIN();
-
-    RUN_TEST(test_test);
-
-    return UNITY_END();
-}
+#endif /* SRC_STRTOK_H_ */

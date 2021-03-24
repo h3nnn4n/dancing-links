@@ -21,6 +21,7 @@
 
 #include "config.h"
 #include "links.h"
+#include "solution_store.h"
 
 uint64_t branchs;
 uint64_t solutions_found;
@@ -76,6 +77,8 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
         printf("Solved. Took %lu steps\n", branchs);  // Line 1
         printf("Found %lu solutions\n", solutions_found);
 
+        store_begin();
+
         int     w;
         _ans *  ans_tmp;
         _links *p;
@@ -84,9 +87,11 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
             }
             c = p;
             for (w = 0; p != c || w == 0; p = p->R, w++) {
-                printf("%2.d ", p->C->n > n ? p->C->n - n : p->C->n);
+                printf("%2.d ", p->C->n % n);
+                store_add_cell(p->C->n);
             }
             puts("");
+            store_begin_new_row();
         }
 
         if (ans_tmp->next == NULL) {
@@ -94,10 +99,14 @@ void dancing_links(_links *h, int k, _ans *ans, int n) {
             }
             c = p;
             for (w = 0; p != c || w == 0; p = p->R, w++) {
-                printf("%2.d ", p->C->n > n ? p->C->n - n : p->C->n);
+                printf("%2.d ", p->C->n % n);
+                store_add_cell(p->C->n);
             }
             puts("");
+            store_begin_new_row();
         }
+
+        store_end();
 
         puts("--------------------");
 
@@ -216,9 +225,7 @@ void build_links_for_dancing(_links *h, int **m, int x, int y) {
 }
 
 void insert_col_header(_links *h) {
-    _links *new  = (_links *)malloc(sizeof(_links));
-    static int c = 0;
-    printf("%3d %p - alloc\n", c++, new);
+    _links *new = (_links *)malloc(sizeof(_links));
     _links *a;
 
     a         = h->L;
@@ -251,8 +258,7 @@ void free_ans(_ans *O) {
 }
 
 void free_links(_links *h) {
-    _links *   a  = h->R;
-    static int cc = 0;
+    _links *a = h->R;
 
     while (a != h) {
         _links *d = a->D;
@@ -263,7 +269,6 @@ void free_links(_links *h) {
         }
 
         _links *b = a->R;
-        printf("%3d %p - free\n", cc++, a);
         free(a);
         a = b;
     }

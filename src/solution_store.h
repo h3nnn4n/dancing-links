@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015,2021  h3nnn4n, aka Renan S. Silva
+ * Copyright (C) 2021  h3nnn4n, aka Renan S. Silva
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,17 +15,12 @@
  *
  */
 
-#include <unity.h>
+#ifndef SRC_SOLUTION_STORE_H_
+#define SRC_SOLUTION_STORE_H_
 
-void test_test() { TEST_PASS(); }
+void store_begin();
+void store_add_cell(int cell_value);
+void store_begin_new_row();
+void store_end();
 
-void setUp() {}
-void tearDown() {}
-
-int main() {
-    UNITY_BEGIN();
-
-    RUN_TEST(test_test);
-
-    return UNITY_END();
-}
+#endif  // SRC_SOLUTION_STORE_H_

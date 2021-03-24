@@ -17,6 +17,9 @@ jobs:
           python3 -m pip install cpplint
           python3 -m pip install scan-build
 
+      - name: Update Path
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
       - name: Update compile database
         run: |
           make clean

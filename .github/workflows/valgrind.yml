@@ -1,0 +1,30 @@
+name: valgrind
+
+on: push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+          submodules: true
+
+      - name: Install deps
+        run: |
+          sudo apt-get update
+          sudo apt-get -y -qq install valgrind
+
+      - name: Build
+        run: make callgrind
+
+      - name: Run valgrind on sudoku gen
+        run: ./dancing-links --sudoku-gen samples/sudoku/sudoku_2.in > sudoku_test.dat
+
+      - name: Run valgrind on sudoku solve
+        run: ./dancing-links --single-solution < sudoku_test.dat
+
+      - name: Run valgrind on sudoku parse
+        run: ./dancing-links --sudoku-parse output.dat

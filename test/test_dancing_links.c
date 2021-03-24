@@ -1,5 +1,23 @@
+/*
+ * Copyright (C) 2015,2021  h3nnn4n, aka Renan S. Silva
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unity.h>
 
 #include <config.h>
@@ -17,9 +35,9 @@ void test_single_solution_solve() {
 
     FILE *f = fopen("./samples/5x5_5_pentoI.dat", "rt");
 
-    fscanf(f, "%d", &y);
-    fscanf(f, "%d", &x);
-    fscanf(f, "%d", &n);
+    fscanf(f, "%d", &y);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fscanf(f, "%d", &x);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fscanf(f, "%d", &n);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
 
     set = (int **)malloc(sizeof(int *) * y);
 
@@ -32,6 +50,7 @@ void test_single_solution_solve() {
 
     for (i = 0; i < x; i++) {
         for (j = 0; j < y; j++) {
+            // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
             fscanf(f, "%d", &set[j][i]);
         }
     }
@@ -41,6 +60,8 @@ void test_single_solution_solve() {
     build_links_for_dancing(m, set, x, y);
 
     _ans *O = (_ans *)malloc(sizeof(_ans));
+    // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    memset(O, 0, sizeof(_ans));
     dancing_links(m, 0, O, n);
 
     TEST_ASSERT_EQUAL(solutions_found, 1);
@@ -58,9 +79,9 @@ void test_multiple_solutions_solve() {
 
     FILE *f = fopen("./samples/5x5_5_pentoI.dat", "rt");
 
-    fscanf(f, "%d", &y);
-    fscanf(f, "%d", &x);
-    fscanf(f, "%d", &n);
+    fscanf(f, "%d", &y);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fscanf(f, "%d", &x);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fscanf(f, "%d", &n);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
 
     set = (int **)malloc(sizeof(int *) * y);
 
@@ -73,6 +94,7 @@ void test_multiple_solutions_solve() {
 
     for (i = 0; i < x; i++) {
         for (j = 0; j < y; j++) {
+            // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
             fscanf(f, "%d", &set[j][i]);
         }
     }
@@ -82,6 +104,8 @@ void test_multiple_solutions_solve() {
     build_links_for_dancing(m, set, x, y);
 
     _ans *O = (_ans *)malloc(sizeof(_ans));
+    // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    memset(O, 0, sizeof(_ans));
     dancing_links(m, 0, O, n);
 
     TEST_ASSERT_EQUAL(solutions_found, 240);

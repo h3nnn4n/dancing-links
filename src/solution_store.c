@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015,2021  h3nnn4n, aka Renan S. Silva
+ * Copyright (C) 2021  h3nnn4n, aka Renan S. Silva
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -15,17 +15,22 @@
  *
  */
 
-#include <unity.h>
+#include <stdio.h>
 
-void test_test() { TEST_PASS(); }
+#include "solution_store.h"
 
-void setUp() {}
-void tearDown() {}
+FILE *f = NULL;
 
-int main() {
-    UNITY_BEGIN();
+void store_begin() { f = fopen("output.dat", "wt"); }
 
-    RUN_TEST(test_test);
+void store_end() { fclose(f); }
 
-    return UNITY_END();
+void store_begin_new_row() {
+    // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fprintf(f, "\n");
+}
+
+void store_add_cell(int cell_value) {
+    // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+    fprintf(f, "%2d ", cell_value);
 }
