@@ -5,6 +5,7 @@ on: push
 jobs:
   run-benchmarks:
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
 
     strategy:
       matrix:
