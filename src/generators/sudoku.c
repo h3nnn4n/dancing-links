@@ -29,7 +29,7 @@ void sudoku_generator(FILE *sudoku_output, char *sudoku_input) {
     uint16_t **clues   = load_and_parse_sudoku(sudoku_input, &n_clues);
 
     uint16_t n_columns    = N_CELLS * 4;
-    uint16_t n_rows       = BLOCK_SIZE * BLOCK_SIZE * BLOCK_SIZE;
+    uint16_t n_rows       = BLOCK_SIZE * BLOCK_SIZE * BLOCK_SIZE - n_clues * (MAX_VALUE - 1);
     uint16_t n_rows_check = 0;
     uint16_t n_n          = N_CELLS;
 
@@ -72,9 +72,8 @@ void sudoku_generator(FILE *sudoku_output, char *sudoku_input) {
                 for (int i = 0; i < n_clues; i++) {
                     uint16_t row    = clues[i][0];
                     uint16_t column = clues[i][1];
-                    uint16_t value  = clues[i][2];
 
-                    if (row == row_i && column == column_i && value == value_i) {
+                    if (row == row_i && column == column_i) {
                         skip = 1;
                         break;
                     }
@@ -90,6 +89,10 @@ void sudoku_generator(FILE *sudoku_output, char *sudoku_input) {
     }
 
     /*printf("\n");*/
+
+    if (n_rows != n_rows_check) {
+        printf("%d %d \n", n_rows, n_rows_check);
+    }
 
     assert(n_rows == n_rows_check);
 
