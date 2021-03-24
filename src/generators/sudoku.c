@@ -24,9 +24,7 @@
 #include "../file_utils.h"
 #include "generators/sudoku.h"
 
-void sudoku_generator(char *sudoku_input) {
-    FILE *f = stdout;
-
+void sudoku_generator(FILE *sudoku_output, char *sudoku_input) {
     uint16_t   n_clues = 0;
     uint16_t **clues   = load_and_parse_sudoku(sudoku_input, &n_clues);
 
@@ -35,7 +33,7 @@ void sudoku_generator(char *sudoku_input) {
     uint16_t n_rows_check = 0;
     uint16_t n_n          = N_CELLS;
 
-    fprintf(f, "%d %d %d\n", n_columns, n_rows, n_n);
+    fprintf(sudoku_output, "%d %d %d\n", n_columns, n_rows, n_n);
 
     /*printf("making coverset with clues\n");*/
 
@@ -45,7 +43,7 @@ void sudoku_generator(char *sudoku_input) {
         uint16_t value  = clues[i][2];
 
         /*printf("%2d %d %d %d\n", i, row, column, value);*/
-        build_cover_set(f, row, column, value);
+        build_cover_set(sudoku_output, row, column, value);
         n_rows_check += 1;
     }
 
@@ -68,7 +66,7 @@ void sudoku_generator(char *sudoku_input) {
                 if (skip)
                     continue;
 
-                build_cover_set(f, row_i, column_i, value_i);
+                build_cover_set(sudoku_output, row_i, column_i, value_i);
                 n_rows_check += 1;
             }
         }

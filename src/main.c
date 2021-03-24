@@ -68,7 +68,7 @@ int main(int argc, char **argv) {
                 // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
                 memcpy(sudoku_input, optarg, sizeof(char) * (strlen(optarg) + 1));
 
-                sudoku_generator(sudoku_input);
+                sudoku_generator(stdout, sudoku_input);
 
                 free(sudoku_input);
             }

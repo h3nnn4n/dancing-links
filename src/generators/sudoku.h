@@ -36,7 +36,7 @@
 #define N_CELLS       (GRID_SIZE * GRID_SIZE * N_GRIDS * N_GRIDS)
 #define MAX_VALUE     (GRID_SIZE * GRID_SIZE)
 
-void       sudoku_generator(char *input);
+void       sudoku_generator(FILE *sudoku_output, char *sudoku_input);
 void       build_cover_set(FILE *f, uint16_t row, uint16_t column, uint16_t value);
 uint16_t   global_to_in_block_position(uint16_t row, uint16_t column, uint16_t value);
 uint16_t **load_and_parse_sudoku(char *input, uint16_t *n_clues);
