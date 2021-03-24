@@ -19,6 +19,9 @@ jobs:
           sudo apt-get -y -qq install clang-tidy cmake jq clang cppcheck
           python -m pip install scan-build
 
+      - name: Update Path
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
       - name: Update compile database
         run: |
           make clean
