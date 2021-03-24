@@ -32,7 +32,7 @@ jobs:
 
       - name: Run sudoku gen and solve
         run: |
-          ./dancing-links --sudoku-gen samples/sudoku/sudoku_2.in
+          ./dancing-links --sudoku-gen samples/sudoku/sudoku_2.in > sudoku_test.dat
           ./dancing-links --single-solution < sudoku_test.dat
           ./dancing-links --sudoku-parse output.dat
 
@@ -43,6 +43,6 @@ jobs:
 
       - name: Run sudoku gen and solve
         run: |
-          ./dancing-links --sudoku-gen samples/sudoku/sudoku.in
+          ./dancing-links --sudoku-gen samples/sudoku/sudoku.in > sudoku_test.dat
           ./dancing-links --single-solution < sudoku_test.dat
           ./dancing-links --sudoku-parse output.dat

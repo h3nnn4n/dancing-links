@@ -25,21 +25,17 @@
 #include "generators/sudoku.h"
 
 void sudoku_generator(char *sudoku_input) {
-    FILE *f = fopen("sudoku_test.dat", "wt");
-
-    char buffer[256];
-    // This is a placeholder string that we add when creating the file because
-    // it is easier to replace at the beggining of a file than to add.
-    // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
-    snprintf(buffer, sizeof(buffer), "xxxxxxxxxxxxxxxxxxxx\n");
-    fwrite(buffer, strlen(buffer), 1, f);
+    FILE *f = stdout;
 
     uint16_t   n_clues = 0;
     uint16_t **clues   = load_and_parse_sudoku(sudoku_input, &n_clues);
 
-    uint16_t n_columns = N_CELLS * 4;
-    uint16_t n_rows    = 0;
-    uint16_t n_n       = N_CELLS;
+    uint16_t n_columns    = N_CELLS * 4;
+    uint16_t n_rows       = 9 * 9 * 9;
+    uint16_t n_rows_check = 0;
+    uint16_t n_n          = N_CELLS;
+
+    fprintf(f, "%d %d %d\n", n_columns, n_rows, n_n);
 
     /*printf("making coverset with clues\n");*/
 
@@ -50,7 +46,7 @@ void sudoku_generator(char *sudoku_input) {
 
         /*printf("%2d %d %d %d\n", i, row, column, value);*/
         build_cover_set(f, row, column, value);
-        n_rows += 1;
+        n_rows_check += 1;
     }
 
     for (int value_i = 1; value_i <= MAX_VALUE; value_i++) {
@@ -73,28 +69,16 @@ void sudoku_generator(char *sudoku_input) {
                     continue;
 
                 build_cover_set(f, row_i, column_i, value_i);
-                n_rows += 1;
+                n_rows_check += 1;
             }
         }
     }
 
     /*printf("\n");*/
 
-    rewind(f);
-    // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
-    snprintf(buffer, sizeof(buffer), "%d %d %d", n_columns, n_rows, n_n);
-    size_t buf_len = strlen(buffer);
-
-    for (uint16_t i = 0; i <= 20 - buf_len; i++) {
-        buffer[i + buf_len] = ' ';
-    }
-    buffer[20] = '\0';
-
-    fwrite(buffer, strlen(buffer), 1, f);
+    assert(n_rows == n_rows_check);
 
     unload_clues(clues, n_clues);
-
-    fclose(f);
 }
 
 void build_cover_set(FILE *f, uint16_t row, uint16_t column, uint16_t value) {
