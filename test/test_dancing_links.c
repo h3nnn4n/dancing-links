@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unity.h>
 
 #include <config.h>
@@ -41,6 +42,7 @@ void test_single_solution_solve() {
     build_links_for_dancing(m, set, x, y);
 
     _ans *O = (_ans *)malloc(sizeof(_ans));
+    memset(O, 0, sizeof(_ans));
     dancing_links(m, 0, O, n);
 
     TEST_ASSERT_EQUAL(solutions_found, 1);
@@ -82,6 +84,7 @@ void test_multiple_solutions_solve() {
     build_links_for_dancing(m, set, x, y);
 
     _ans *O = (_ans *)malloc(sizeof(_ans));
+    memset(O, 0, sizeof(_ans));
     dancing_links(m, 0, O, n);
 
     TEST_ASSERT_EQUAL(solutions_found, 240);
