@@ -18,6 +18,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "config.h"
 #include "dlx_solver.h"
@@ -76,6 +77,7 @@ void dlx_solver() {
     }
 
     _ans *O = (_ans *)malloc(sizeof(_ans));
+    memset(O, 0, sizeof(_ans));  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
     dancing_links(m, 0, O, n);
 
     if (!quiet) {
