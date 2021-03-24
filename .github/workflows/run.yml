@@ -16,7 +16,7 @@ jobs:
           fetch-depth: 1
           submodules: true
 
-      - name: Build
+      - name: Build (2x2)
         run: make
         env:
           CFLAGS: -DGRID_SIZE=2 -DN_GRIDS=2
@@ -34,3 +34,15 @@ jobs:
         run: |
           ./dancing-links --sudoku-gen samples/sudoku/sudoku_2.in
           ./dancing-links --single-solution < sudoku_test.dat
+          ./dancing-links --sudoku-parse output.dat
+
+      - name: Build (3x3)
+        run: make
+        env:
+          CFLAGS: -DGRID_SIZE=3 -DN_GRIDS=3
+
+      - name: Run sudoku gen and solve
+        run: |
+          ./dancing-links --sudoku-gen samples/sudoku/sudoku.in
+          ./dancing-links --single-solution < sudoku_test.dat
+          ./dancing-links --sudoku-parse output.dat
