@@ -31,7 +31,7 @@ void sudoku_generator(char *sudoku_input) {
     uint16_t **clues   = load_and_parse_sudoku(sudoku_input, &n_clues);
 
     uint16_t n_columns    = N_CELLS * 4;
-    uint16_t n_rows       = 9 * 9 * 9;
+    uint16_t n_rows       = BLOCK_SIZE * BLOCK_SIZE * BLOCK_SIZE;
     uint16_t n_rows_check = 0;
     uint16_t n_n          = N_CELLS;
 

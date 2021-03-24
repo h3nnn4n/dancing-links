@@ -21,7 +21,7 @@ jobs:
         run: make callgrind
 
       - name: Run valgrind on sudoku gen
-        run: ./dancing-links --sudoku-gen samples/sudoku/sudoku_2.in
+        run: ./dancing-links --sudoku-gen samples/sudoku/sudoku_2.in > sudoku_test.dat
 
       - name: Run valgrind on sudoku solve
         run: ./dancing-links --single-solution < sudoku_test.dat
