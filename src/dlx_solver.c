@@ -15,6 +15,7 @@
  *
  */
 
+#include <assert.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -35,21 +36,31 @@ void dlx_solver() {
     fscanf(stdin, "%d", &x);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
     fscanf(stdin, "%d", &n);  // NOLINT(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
 
-    int **set = (int **)malloc(sizeof(int *) * y);
+    int * column_check = (int *)malloc(sizeof(int) * y);
+    int **set          = (int **)malloc(sizeof(int *) * y);
 
     m = init_torus();
 
     for (int i = 0; i < y; i++) {
         insert_col_header(m);
-        set[i] = (int *)malloc(sizeof(int) * x);
+        set[i]          = (int *)malloc(sizeof(int) * x);
+        column_check[i] = 0;
     }
 
     for (int i = 0; i < x; i++) {
         for (int j = 0; j < y; j++) {
             // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
             fscanf(stdin, "%d", &set[j][i]);
+
+            column_check[j]++;
         }
     }
+
+    for (int i = 0; i < y; i++) {
+        assert(column_check[i] > 0);
+    }
+
+    free(column_check);
 
     if (!quiet) {
         puts("--------------------");
