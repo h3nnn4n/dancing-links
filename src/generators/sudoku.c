@@ -216,7 +216,7 @@ uint16_t **load_and_parse_sudoku(char *input, uint16_t *n_clues) {
     uint16_t **clues = (uint16_t **)malloc(sizeof(uint16_t *) * N_CELLS);
 
     // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
-    memset(clues, 0, N_CELLS);
+    memset(clues, 0, sizeof(uint16_t *) * N_CELLS);
 
     if (file_exists(input)) {
         FILE *f = fopen(input, "rt");
