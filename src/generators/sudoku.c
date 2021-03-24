@@ -33,6 +33,23 @@ void sudoku_generator(FILE *sudoku_output, char *sudoku_input) {
     uint16_t n_rows_check = 0;
     uint16_t n_n          = N_CELLS;
 
+    sudoku_check_t sudoku_check;
+
+    sudoku_check.column_check = (int *)malloc(sizeof(int) * n_columns);
+    sudoku_check.row_check    = (int *)malloc(sizeof(int) * n_rows);
+    sudoku_check.grid_check   = (int **)malloc(sizeof(int *) * n_columns);
+
+    for (int i = 0; i < n_rows; i++) {
+        sudoku_check.row_check[i] = 0;
+    }
+
+    for (int i = 0; i < n_columns; i++) {
+        sudoku_check.grid_check[i] = (int *)malloc(sizeof(int) * n_rows);
+        // NOLINTNEXTLINE(clang-analyzer-security.insecureAPI.DeprecatedOrUnsafeBufferHandling)
+        memset(sudoku_check.grid_check[i], 0, sizeof(int) * n_rows);
+        sudoku_check.column_check[i] = 0;
+    }
+
     fprintf(sudoku_output, "%d %d %d\n", n_columns, n_rows, n_n);
 
     /*printf("making coverset with clues\n");*/
@@ -43,7 +60,7 @@ void sudoku_generator(FILE *sudoku_output, char *sudoku_input) {
         uint16_t value  = clues[i][2];
 
         /*printf("%2d %d %d %d\n", i, row, column, value);*/
-        build_cover_set(sudoku_output, row, column, value);
+        build_cover_set(sudoku_output, row, column, value, &sudoku_check);
         n_rows_check += 1;
     }
 
@@ -66,7 +83,7 @@ void sudoku_generator(FILE *sudoku_output, char *sudoku_input) {
                 if (skip)
                     continue;
 
-                build_cover_set(sudoku_output, row_i, column_i, value_i);
+                build_cover_set(sudoku_output, row_i, column_i, value_i, &sudoku_check);
                 n_rows_check += 1;
             }
         }
@@ -76,10 +93,18 @@ void sudoku_generator(FILE *sudoku_output, char *sudoku_input) {
 
     assert(n_rows == n_rows_check);
 
+    free(sudoku_check.row_check);
+    free(sudoku_check.column_check);
+    for (int i = 0; i < n_columns; i++) {
+        free(sudoku_check.grid_check[i]);
+    }
+    free(sudoku_check.grid_check);
+
     unload_clues(clues, n_clues);
 }
 
-void build_cover_set(FILE *f, uint16_t row, uint16_t column, uint16_t value) {
+void build_cover_set(FILE *f, uint16_t row, uint16_t column, uint16_t value,
+                     __attribute__((unused)) sudoku_check_t *sudoku_check) {
     /*printf("%d %d %c\n", row, column, value);*/
     assert(value > 0);
     assert(value <= MAX_VALUE);
