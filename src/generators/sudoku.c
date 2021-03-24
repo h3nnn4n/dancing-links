@@ -34,10 +34,8 @@ void sudoku_generator(char *sudoku_input) {
     snprintf(buffer, sizeof(buffer), "xxxxxxxxxxxxxxxxxxxx\n");
     fwrite(buffer, strlen(buffer), 1, f);
 
-    uint16_t   n_clues   = 0;
-    uint16_t **clues     = load_and_parse_sudoku(sudoku_input, &n_clues);
-    uint16_t   grid_size = 2;
-    uint16_t   n_grids   = 2;
+    uint16_t   n_clues = 0;
+    uint16_t **clues   = load_and_parse_sudoku(sudoku_input, &n_clues);
 
     uint16_t n_columns = N_CELLS * 4;
     uint16_t n_rows    = 0;
@@ -55,9 +53,9 @@ void sudoku_generator(char *sudoku_input) {
         n_rows += 1;
     }
 
-    for (int value_i = 1; value_i <= grid_size * grid_size; value_i++) {
-        for (int row_i = 0; row_i < grid_size * n_grids; row_i++) {
-            for (int column_i = 0; column_i < grid_size * n_grids; column_i++) {
+    for (int value_i = 1; value_i <= MAX_VALUE; value_i++) {
+        for (int row_i = 0; row_i < ROW_LENGTH; row_i++) {
+            for (int column_i = 0; column_i < COLUMN_LENGTH; column_i++) {
                 int skip = 0;
 
                 for (int i = 0; i < n_clues; i++) {
@@ -103,6 +101,9 @@ void build_cover_set(FILE *f, uint16_t row, uint16_t column, uint16_t value) {
     /*printf("%d %d %c\n", row, column, value);*/
     assert(value > 0);
     assert(value <= MAX_VALUE);
+
+    assert(row < ROW_LENGTH);
+    assert(column < ROW_LENGTH);
 
     int cell_written = 0;
     // Position Constrain
