@@ -17,7 +17,7 @@ jobs:
           submodules: true
 
       - name: Build (2x2)
-        run: make
+        run: make rebuild
         env:
           CFLAGS: -DGRID_SIZE=2 -DN_GRIDS=2
 
@@ -37,7 +37,7 @@ jobs:
           ./dancing-links --sudoku-parse output.dat
 
       - name: Build (3x3)
-        run: make
+        run: make rebuild
         env:
           CFLAGS: -DGRID_SIZE=3 -DN_GRIDS=3
 
